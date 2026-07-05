@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — SocialFeed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary:    #8A4FF7;
+      --text:       #1a1a1a;
+      --text-2:     #555;
+      --text-muted: #aaa;
+      --error:      #e63950;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    body.ready { opacity: 1; }
+
+    /* ── Top bar ── */
+    .topbar {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 28px 0;
+    }
+
+    .help-pill,
+    .lang-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      color: #1a1a1a;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 4px 6px;
+      border-radius: 20px;
+      transition: background 0.15s ease;
+    }
+    .help-pill:hover,
+    .lang-pill:hover { background: #f5f5f5; }
+
+    .icon-circle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .icon-circle svg { display: block; }
+
+    .lang-pill {
+      border: 1.5px solid #e0e0e0;
+      border-radius: 20px;
+      padding: 3px 9px 3px 7px;
+      font-size: 12px;
+      gap: 4px;
+    }
+    .lang-pill svg { flex-shrink: 0; width: 13px; height: 13px; }
+
+    /* ── Wrapper ── */
+    .wrapper {
+      width: 100%;
+      max-width: 420px;
+      padding: 96px 28px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── Logo ── */
+    .logo {
+      margin-bottom: 26px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .logo img {
+      width: 190px;
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ── Heading ── */
+    .welcome {
+      font-size: 22px;
+      font-weight: 600;
+      color: #1a1a1a;
+      text-align: center;
+      margin-bottom: 6px;
+      letter-spacing: -0.2px;
+    }
+    .subtitle {
+      font-size: 13px;
+      color: #999;
+      text-align: center;
+      margin-bottom: 26px;
+      font-weight: 400;
+    }
+
+    /* ── Form ── */
+    .form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* ── Field (signup style) ── */
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .field label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-2);
+      padding-left: 2px;
+    }
+
+    /* ── Input wrap (signup pill style) ── */
+    .input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrap input {
+      width: 100%;
+      height: 56px;
+      padding: 0 18px;
+      border: none;
+      border-radius: 999px;
+      font-size: 15px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      color: var(--text);
+      background: #efefef;
+      outline: none;
+      cursor: text;
+      transition: background .18s, box-shadow .18s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .input-wrap input::placeholder { color: var(--text-muted); }
+
+    .input-wrap input:focus {
+      background: #e8e8e8;
+      box-shadow: none;
+      caret-color: var(--primary);
+    }
+
+    /* Password toggle inside input */
+    .pw-toggle {
+      position: absolute;
+      right: 12px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ── Forgot password ── */
+    .forgot-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: -2px;
+    }
+
+    .forgot-link {
+      font-size: 12.5px;
+      color: #1a1a1a;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .forgot-link:hover { opacity: 0.7; text-decoration: underline; }
+
+    /* ── Error message ── */
+    .error-msg {
+      display: none;
+      color: #d63b3b;
+      font-size: 13px;
+      text-align: center;
+      padding: 2px 4px;
+      font-weight: 500;
+    }
+
+    /* ── Login button ── */
+    .login-btn {
+      width: 100%;
+      padding: 11px;
+      background: #1a1a1a;
+      border: none;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      transition: opacity 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+      margin-top: 2px;
+      position: relative;
+      letter-spacing: 0.2px;
+    }
+
+    .login-btn:hover:not(:disabled) {
+      opacity: 0.88;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+    }
+
+    .login-btn:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .login-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Loading spinner inside button */
+    .login-btn.loading { color: transparent; }
+
+    .login-btn.loading::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      border: 2.5px solid rgba(255, 255, 255, 0.35);
+      border-top-color: #ffffff;
+      border-radius: 50%;
+      animation: spin 0.65s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* ── Divider "or" ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      margin-top: 4px;
+    }
+    .divider .line {
+      flex: 1;
+      height: 1px;
+      background: #e5e5e5;
+    }
+    .divider span {
+      font-size: 12.5px;
+      color: #999;
+      font-weight: 500;
+    }
+
+    /* ── Create account button ── */
+    .create-account-btn {
+      width: 100%;
+      padding: 10px;
+      background: #fff;
+      border: 1.5px solid #1a1a1a;
+      border-radius: 999px;
+      color: #1a1a1a;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+    .create-account-btn:hover {
+      background: #f7f7f7;
+      transform: translateY(-1px);
+    }
+    .create-account-btn:active {
+      transform: translateY(0);
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 480px) {
+      .wrapper  { padding: 72px 20px 0; }
+      .topbar   { padding: 16px 20px 0; }
+      .welcome  { font-size: 20px; }
+      .logo img { width: 165px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ Top bar ══ -->
+  <div class="topbar">
+    <button class="help-pill" type="button" aria-label="Help">
+      <span class="icon-circle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 2-3 4"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+      </span>
+      Help
+    </button>
+
+    <button class="lang-pill" type="button" aria-label="Change language">
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+           fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="2" y1="12" x2="22" y2="12"/>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+      </svg>
+      English
+    </button>
+  </div>
+
+  <!-- ══ Main wrapper ══ -->
+  <div class="wrapper">
+
+    <!-- Logo -->
+    <div class="logo">
+      <img
+        src="https://i.ibb.co/67rjXd2D/file-0000000035747207811bfdf654b4a6ef-1.jpg"
+        alt="SocialFeed Logo"
+        draggable="false"
+      />
+    </div>
+
+    <!-- Heading -->
+    <h1 class="welcome">Welcome back! 👋</h1>
+    <p class="subtitle">Log in to continue your journey</p>
+
+    <!-- Form -->
+    <div class="form">
+
+      <!-- Email -->
+      <div class="field">
+        <label for="emailInput">Email</label>
+        <div class="input-wrap">
+          <input
+            type="email"
+            id="emailInput"
+            placeholder="you@example.com"
+            autocomplete="email"
+            inputmode="email"
+          />
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="field">
+        <label for="passwordInput">Password</label>
+        <div class="input-wrap">
+          <input
+            type="password"
+            id="passwordInput"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+          />
+          <button class="pw-toggle" id="togglePw" type="button" aria-label="Show password">
+            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Error -->
+      <div class="error-msg" id="errorMsg"></div>
+
+      <!-- Forgot password -->
+      <div class="forgot-row">
+        <a href="/forgot-password" class="forgot-link">Forgot Password?</a>
+      </div>
+
+      <!-- Login button -->
+      <button class="login-btn" id="loginBtn">Log In</button>
+
+      <!-- Divider -->
+      <div class="divider">
+        <span class="line"></span>
+        <span>or</span>
+        <span class="line"></span>
+      </div>
+
+      <!-- Create account -->
+      <a href="/signup" class="create-account-btn">Create new account</a>
+
+    </div>
+
+  </div>
+
+
+  <!-- ══ Firebase Logic (ES Module) ══ -->
+  <script type="module">
+    // ============================================================
+    //  Firebase Configuration (from config.js)
+    // ============================================================
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDGIVcJLieXaxYwOpLLt5A9CwttF0GQzAI",
+      authDomain: "vers-fe30a.firebaseapp.com",
+      databaseURL: "https://vers-fe30a-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "vers-fe30a",
+      storageBucket: "vers-fe30a.firebasestorage.app",
+      messagingSenderId: "56765833106",
+      appId: "1:56765833106:web:2b4bb51e904ba1d8262b4b",
+      measurementId: "G-DCB633V1MG"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const emailInput    = document.getElementById("emailInput");
+    const passwordInput = document.getElementById("passwordInput");
+    const loginBtn      = document.getElementById("loginBtn");
+    const errorMsg      = document.getElementById("errorMsg");
+    const togglePw      = document.getElementById("togglePw");
+
+    // ── SVG icons ────────────────────────────────────────────
+    const EYE_ICON = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24"
+           fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>`;
+
+    const EYE_OFF_ICON = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24"
+           fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8
+                 a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1
+                 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19
+                 m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+        <line x1="1" y1="1" x2="23" y2="23"/>
+      </svg>`;
+
+    // ── Already logged in → redirect ────────────────────────
+    onAuthStateChanged(auth, (user) => {
+      if (user) window.location.href = "/";
+    });
+
+    // ── Password show / hide ─────────────────────────────────
+    togglePw.addEventListener("click", () => {
+      const hidden = passwordInput.type === "password";
+      passwordInput.type   = hidden ? "text" : "password";
+      togglePw.innerHTML   = hidden ? EYE_OFF_ICON : EYE_ICON;
+      togglePw.setAttribute("aria-label", hidden ? "Hide password" : "Show password");
+    });
+
+    // ── Error helpers ────────────────────────────────────────
+    function showError(msg) {
+      errorMsg.textContent   = msg;
+      errorMsg.style.display = "block";
+    }
+    function clearError() {
+      errorMsg.textContent   = "";
+      errorMsg.style.display = "none";
+    }
+
+    function friendlyError(code) {
+      const map = {
+        "auth/invalid-email":          "Please enter a valid email address.",
+        "auth/too-many-requests":      "Too many attempts. Please try again later.",
+        "auth/network-request-failed": "Network error. Check your connection.",
+        "auth/user-not-found":         "Incorrect email or password.",
+        "auth/wrong-password":         "Incorrect email or password.",
+        "auth/invalid-credential":     "Incorrect email or password.",
+        "auth/user-disabled":          "Incorrect email or password."
+      };
+      return map[code] || "Login failed. Please try again.";
+    }
+
+    // ── Login handler ────────────────────────────────────────
+    async function handleLogin() {
+      clearError();
+
+      const email    = emailInput.value.trim();
+      const password = passwordInput.value;
+
+      if (!email)    { showError("Please enter your email.");    return; }
+      if (!password) { showError("Please enter your password."); return; }
+
+      loginBtn.classList.add("loading");
+      loginBtn.disabled = true;
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        window.location.href = "/";
+      } catch (err) {
+        showError(friendlyError(err.code));
+        loginBtn.classList.remove("loading");
+        loginBtn.disabled = false;
+      }
+    }
+
+    loginBtn.addEventListener("click", handleLogin);
+
+    [emailInput, passwordInput].forEach((el) => {
+      el.addEventListener("keydown", (e) => { if (e.key === "Enter") handleLogin(); });
+      el.addEventListener("input",   clearError);
+    });
+
+    // ── Reveal the page all at once ──
+    window.addEventListener("load", () => {
+      document.body.classList.add("ready");
+    });
+  </script>
+
+</body>
+</html>

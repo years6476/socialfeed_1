@@ -17,11 +17,11 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 .menu-btn:hover{background:#f0f0f0}
 .menu-btn i{font-size:22px;color:#333}
 .logo{height:30px;width:auto;object-fit:contain}
-.header-right{display:flex;align-items:center;gap:12px}
-.header-icon{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s;position:relative}
+.header-right{display:flex;align-items:center;gap:10px}
+.header-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s;position:relative}
 .header-icon:hover{background:#f0f0f0}
-.header-icon i{font-size:22px;color:#333}
-.notification-badge{position:absolute;top:6px;right:6px;width:8px;height:8px;background:#ff3b30;border-radius:50%;border:2px solid #fff}
+.header-icon i{font-size:20px;color:#333}
+.notification-badge{position:absolute;top:4px;right:4px;width:8px;height:8px;background:#ff3b30;border-radius:50%;border:2px solid #fff}
 
 /* STORIES - SMALLER */
 .stories-container{background:#fff;padding:10px 0;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;border-bottom:1px solid rgba(224,224,224,0.4)}
@@ -43,11 +43,11 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 .create-post-input{flex:1;height:40px;border:1px solid #e0e0e0;border-radius:20px;padding:0 16px;font-size:14px;color:#666;background:#fff;cursor:pointer;transition:border-color .2s,background .2s;display:flex;align-items:center}
 .create-post-input:hover{border-color:#ccc;background:#f8f8f8}
 
-/* TABS */
+/* TABS - Black text and underline */
 .tabs-container{display:flex;align-items:center;padding:0 12px;background:#fff;border-bottom:1px solid rgba(224,224,224,0.4)}
 .tab-item{position:relative;padding:10px 0;margin-right:20px;font-size:13px;font-weight:600;color:#888;cursor:pointer;transition:color .2s;white-space:nowrap}
-.tab-item.active{color:#1877f2}
-.tab-item::after{content:'';position:absolute;bottom:0;left:-4px;right:-4px;height:2px;background:#1877f2;border-radius:1px;transform:scaleX(0);transition:transform .25s ease}
+.tab-item.active{color:#1a1a1a}
+.tab-item::after{content:'';position:absolute;bottom:0;left:-4px;right:-4px;height:2px;background:#1a1a1a;border-radius:1px;transform:scaleX(0);transition:transform .25s ease}
 .tab-item.active::after{transform:scaleX(1)}
 .filter-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s;margin-left:auto;flex-shrink:0}
 .filter-icon:hover{background:#f0f0f0}
@@ -68,7 +68,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 .upload-area p{color:#666;font-size:14px}
 .upload-area input[type="file"]{display:none}
 .preview-container{display:none;margin-bottom:16px}
-.preview-container img{max-width:100%;max-height:300px;border-radius:12px;object-fit:cover}
+.preview-container img{max-width:100%;max-height:300px;border-radius:0;object-fit:cover}
 .upload-btn{width:100%;padding:14px;background:#1877f2;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer;margin-top:16px;transition:background .2s}
 .upload-btn:hover{background:#166fe5}
 .upload-btn:disabled{background:#ccc;cursor:not-allowed}
@@ -87,7 +87,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 .post-more{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#666}
 .post-more:hover{background:#f0f0f0}
 .post-more i{font-size:16px}
-.post-image{width:calc(100% - 24px);margin:0 12px;border-radius:12px;max-height:500px;height:auto;object-fit:contain}
+.post-image{width:calc(100% - 24px);margin:0 12px;border-radius:0;max-height:500px;height:auto;object-fit:contain}
 .post-content{padding:6px 12px 8px;font-size:14px;line-height:1.5;color:#333}
 .post-actions{display:flex;align-items:center;padding:8px 12px;gap:20px;border-top:none}
 .action-btn{display:flex;align-items:center;gap:6px;cursor:pointer;color:#666;font-size:14px;font-weight:500;padding:6px 0;transition:color .2s}
@@ -162,9 +162,394 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 .skeleton{animation:skeleton-loading 1s linear infinite alternate}
 @keyframes skeleton-loading{0%{background:#e0e0e0}100%{background:#f0f0f0}}
 .story-skeleton{width:64px;height:64px;border-radius:50%;background:#e0e0e0}
-.post-skeleton-avatar{width:44px;height:44px;border-radius:50%;background:#e0e0e0}
+.post-skeleton-avatar{width:44px;height:44px;border-radius:50%;background:#e0e0f0}
 .post-skeleton-line{height:12px;background:#e0e0e0;border-radius:6px;margin-bottom:8px}
-.post-skeleton-image{width:100%;height:300px;background:#e0e0e0;border-radius:12px}
+.post-skeleton-image{width:calc(100% - 24px);height:300px;background:#e0e0e0;border-radius:0}
+
+
+/* ═══════════════════════════════════════════════════════════
+   VIDEO THUMBNAIL IN FEED (show poster, not player)
+   ═══════════════════════════════════════════════════════════ */
+.video-thumbnail-wrap {
+  position: relative;
+  width: calc(100% - 24px);
+  margin: 0 12px;
+  border-radius: 0;
+  overflow: hidden;
+  cursor: pointer;
+  background: #000;
+}
+.video-thumbnail-wrap video {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  display: block;
+  background: #000;
+}
+.video-thumbnail-wrap video::-webkit-media-controls {
+  display: none !important;
+}
+.video-thumbnail-wrap video::-webkit-media-controls-enclosure {
+  display: none !important;
+}
+
+/* Facebook-style video thumbnail */
+.fb-video-thumb {
+  position: relative;
+  width: 100%;
+  background: #000;
+  overflow: hidden;
+  cursor: pointer;
+}
+.fb-video-thumb img {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  display: block;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  min-height: 200px;
+}
+.fb-video-thumb .fb-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 68px;
+  height: 68px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  transition: transform 0.15s ease, background 0.15s;
+}
+.fb-video-thumb:hover .fb-play-btn {
+  transform: translate(-50%, -50%) scale(1.08);
+  background: #fff;
+}
+.fb-video-thumb .fb-play-btn svg {
+  width: 24px;
+  height: 24px;
+  margin-left: 4px;
+  fill: #1a1a1a;
+}
+.fb-video-thumb .fb-duration {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+}
+.fb-video-thumb .fb-video-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.05);
+  transition: background 0.2s;
+}
+.fb-video-thumb:hover .fb-video-overlay {
+  background: rgba(0,0,0,0.15);
+}
+.video-thumbnail-wrap .video-play-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.15);
+  transition: background 0.2s;
+}
+.video-thumbnail-wrap:hover .video-play-overlay {
+  background: rgba(0,0,0,0.25);
+}
+.video-play-btn {
+  width: 64px;
+  height: 64px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.video-play-btn svg {
+  width: 24px;
+  height: 24px;
+  margin-left: 4px;
+  fill: #1a1a1a;
+}
+.video-duration-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FULL SCREEN VIDEO PLAYER (Reels Style)
+   ═══════════════════════════════════════════════════════════ */
+.video-player-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #000;
+  z-index: 9999;
+  display: none;
+  flex-direction: column;
+}
+.video-player-overlay.active {
+  display: flex;
+}
+.video-player-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+.video-player-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.video-player-top-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+  z-index: 10;
+}
+.video-player-back {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  border: none;
+}
+.video-player-back svg {
+  width: 24px;
+  height: 24px;
+}
+.video-player-title {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+.video-player-more {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  border: none;
+}
+
+/* Right side action buttons */
+.video-actions-sidebar {
+  position: absolute;
+  right: 12px;
+  bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  z-index: 10;
+}
+.video-action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  cursor: pointer;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+.video-action-btn svg,
+.video-action-btn i {
+  width: 28px;
+  height: 28px;
+  font-size: 26px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+.video-action-btn span {
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+.video-action-btn.liked svg {
+  fill: #ff3b30;
+  stroke: #ff3b30;
+}
+.video-action-btn.saved svg {
+  fill: #1877f2;
+  stroke: #1877f2;
+}
+
+/* Bottom info section */
+.video-info-section {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 60px 16px 24px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 60%, transparent 100%);
+  z-index: 10;
+}
+.video-info-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+.video-info-left {
+  flex: 1;
+  min-width: 0;
+}
+.video-info-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.video-info-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+.video-info-name-wrap {
+  display: flex;
+  flex-direction: column;
+}
+.video-info-name {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+.video-info-time {
+  color: rgba(255,255,255,0.7);
+  font-size: 12px;
+  margin-top: 1px;
+}
+.video-info-caption {
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.5;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Progress bar */
+.video-progress-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: rgba(255,255,255,0.2);
+  z-index: 11;
+}
+.video-progress-fill {
+  height: 100%;
+  background: #fff;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+/* Tap area for pause/play */
+.video-tap-area {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 80px;
+  bottom: 120px;
+  z-index: 5;
+  cursor: pointer;
+}
+
+/* Sound toggle button */
+.video-sound-btn {
+  position: absolute;
+  bottom: 130px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  z-index: 10;
+  border: none;
+}
+.video-sound-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Pause overlay icon */
+.video-pause-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: 72px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  z-index: 8;
+}
+.video-pause-icon.active {
+  display: flex;
+}
+.video-pause-icon svg {
+  width: 32px;
+  height: 32px;
+  fill: #fff;
+}
+
+/* Swipe indicator */
+.video-swipe-hint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(255,255,255,0.5);
+  font-size: 12px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
 </style>
 </head>
 <body>
@@ -172,12 +557,13 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 <!-- HEADER -->
 <header class="header">
 <div class="header-left">
-<div class="menu-btn" onclick="toggleMenu()" style="display:flex;align-items:center;justify-content:center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></div>
-<img src="https://i.ibb.co.com/RTYKxMLK/1782826893005-1-removebg-preview.png" alt="App Logo" class="logo" id="appLogo" onerror="this.src='https://via.placeholder.com/120x36?text=SocialApp'">
+<div class="menu-btn" onclick="toggleMenu()" style="display:flex;align-items:center;justify-content:center"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h10"/><path d="M4 18h16"/></svg></div>
+<img src="https://i.ibb.co.com/nMNsCSwX/file-00000000666071fbae3b7db749154855-1-removebg-preview.png" alt="App Logo" class="logo" id="appLogo" onerror="this.src='https://via.placeholder.com/120x36?text=SocialApp'">
 </div>
 <div class="header-right">
-<div class="header-icon" onclick="openSearch()" style="display:flex;align-items:center;justify-content:center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
-<div class="header-icon" onclick="openNotifications()" style="display:flex;align-items:center;justify-content:center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.0" d="M12 5.365V3m0 2.365a5.338 5.338 0 0 1 5.133 5.368v1.8c0 2.386 1.867 2.982 1.867 4.175 0 .593 0 1.292-.538 1.292H5.538C5 18 5 17.301 5 16.708c0-1.193 1.867-1.789 1.867-4.175v-1.8A5.338 5.338 0 0 1 12 5.365ZM8.733 18c.094.852.306 1.54.944 2.112a3.48 3.48 0 0 0 4.646 0c.638-.572 1.236-1.26 1.33-2.112h-6.92Z"/></svg><span class="notification-badge" id="notifBadge" style="display:none"></span></div>
+<div class="header-icon" onclick="openSearch()" style="display:flex;align-items:center;justify-content:center"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
+<div class="header-icon" onclick="openNotifications()" style="display:flex;align-items:center;justify-content:center"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 5.365V3m0 2.365a5.338 5.338 0 0 1 5.133 5.368v1.8c0 2.386 1.867 2.982 1.867 4.175 0 .593 0 1.292-.538 1.292H5.538C5 18 5 17.301 5 16.708c0-1.193 1.867-1.789 1.867-4.175v-1.8A5.338 5.338 0 0 1 12 5.365ZM8.733 18c.094.852.306 1.54.944 2.112a3.48 3.48 0 0 0 4.646 0c.638-.572 1.236-1.26 1.33-2.112h-6.92Z"/></svg><span class="notification-badge" id="notifBadge" style="display:none"></span></div>
+<img src="" alt="Profile" class="header-icon" id="headerProfilePic" style="width:32px;height:32px;border-radius:50%;object-fit:cover;cursor:pointer;padding:0;" onclick="goToProfile()">
 </div>
 </header>
 
@@ -185,10 +571,10 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 <div class="stories-container">
 <div class="stories-wrapper" id="storiesWrapper">
 
-<!-- Create Story -->
+<!-- Create Story - NO RING -->
 <div class="story-item create-story" onclick="openStoryUpload()">
-<div class="story-ring">
-<img src="" alt="Your Profile" class="story-avatar" id="createStoryAvatar">
+<div class="story-ring" style="background:transparent;padding:0">
+<img src="" alt="Your Profile" class="story-avatar" id="createStoryAvatar" style="border:2px solid #e0e0e0">
 <div class="add-btn"><i class="fas fa-plus"></i></div>
 </div>
 <span class="story-label">Create Story</span>
@@ -333,11 +719,11 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 <div class="nav-item nav-plus" onclick="window.location.href='/create'">
 <div class="plus-circle"><i class="fas fa-plus"></i></div>
 </div>
-<div class="nav-item" onclick="window.location.href='/messages'">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" d="M9 17h6l3 3v-3h2V9h-2M4 4h11v8H9l-3 3v-3H4V4Z"/></svg>
+<div class="nav-item" onclick="window.location.href='/reels'">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3.8 8H20.2"/><path d="M7 3L10 8"/><path d="M13 3L16 8"/><path d="M10 11L16 14.5L10 18V11Z" fill="currentColor" stroke="none"/></svg>
 </div>
-<div class="nav-item" onclick="window.location.href='/profile'">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
+<div class="nav-item" onclick="window.location.href='/inbox'">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" d="M9 17h6l3 3v-3h2V9h-2M4 4h11v8H9l-3 3v-3H4V4Z"/></svg>
 </div>
 </div>
 
@@ -386,6 +772,7 @@ function updateUserUI() {
   document.getElementById('createStoryAvatar').src = avatar;
   document.getElementById('userStoryAvatar').src = avatar;
   document.getElementById('createPostAvatar').src = avatar;
+  document.getElementById('headerProfilePic').src = avatar;
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -445,14 +832,38 @@ function addStoryToUI(story) {
 
   const isSeen = story.viewers && story.viewers[currentUser.uid];
 
-  storyEl.innerHTML = `
-    <div class="story-ring ${isSeen ? 'seen' : ''}">
-      <div class="story-ring-inner">
-        <img src="${escapeHtml(story.avatarUrl || story.mediaUrl)}" alt="${escapeHtml(story.authorName || 'User')}" class="story-avatar">
+  // FIX: Use avatarUrl for the profile picture, fallback to mediaUrl
+  // Friend page uses: profilePhotoUrl || photoURL || avatar || photo || ''
+  // We need to fetch the user's profile to get their photo
+  get(ref(db, `users/${story.uid}`)).then(userSnap => {
+    let avatarUrl = '';
+    if (userSnap.exists()) {
+      const u = userSnap.val();
+      avatarUrl = u.profilePhotoUrl || u.photoURL || u.avatar || u.photo || '';
+    }
+    // Fallback chain: user's profile photo -> story.avatarUrl -> story.mediaUrl -> default
+    const finalAvatar = avatarUrl || story.avatarUrl || story.mediaUrl || 'https://i.pravatar.cc/150?img=11';
+
+    storyEl.innerHTML = `
+      <div class="story-ring ${isSeen ? 'seen' : ''}">
+        <div class="story-ring-inner">
+          <img src="${escapeHtml(finalAvatar)}" alt="${escapeHtml(story.authorName || 'User')}" class="story-avatar" onerror="this.src='https://i.pravatar.cc/150?img=11'">
+        </div>
       </div>
-    </div>
-    <span class="story-label">${escapeHtml(story.authorName || 'User')}</span>
-  `;
+      <span class="story-label">${escapeHtml(story.authorName || 'User')}</span>
+    `;
+  }).catch(() => {
+    // Fallback if user fetch fails
+    const finalAvatar = story.avatarUrl || story.mediaUrl || 'https://i.pravatar.cc/150?img=11';
+    storyEl.innerHTML = `
+      <div class="story-ring ${isSeen ? 'seen' : ''}">
+        <div class="story-ring-inner">
+          <img src="${escapeHtml(finalAvatar)}" alt="${escapeHtml(story.authorName || 'User')}" class="story-avatar" onerror="this.src='https://i.pravatar.cc/150?img=11'">
+        </div>
+      </div>
+      <span class="story-label">${escapeHtml(story.authorName || 'User')}</span>
+    `;
+  });
 
   wrapper.appendChild(storyEl);
 }
@@ -620,11 +1031,27 @@ function createPostElement(post) {
   const commentCount = post.comments ? Object.keys(post.comments).length : 0;
   const shareCount = post.shares || 0;
 
-  const mediaHtml = post.mediaUrl ? 
-    (post.mediaType === 'video' ? 
-      `<video src="${escapeHtml(post.mediaUrl)}" class="post-image" controls playsinline></video>` :
-      `<img src="${escapeHtml(post.mediaUrl)}" alt="Post Image" class="post-image" loading="lazy">`) 
-    : '';
+  // Video: show thumbnail with play button, click opens full-screen player
+  // Image: show as before
+  let mediaHtml = '';
+  if (post.mediaUrl) {
+    if (post.mediaType === 'video') {
+      // Extract video duration or show a default
+      const videoDuration = post.videoDuration ? formatDuration(post.videoDuration) : '';
+      mediaHtml = `
+        <div class="fb-video-thumb" onclick="openVideoPlayer('${post.id}', '${post.ownerUid}')">
+          <img src="${escapeHtml(getCloudinaryThumbnail(post.thumbnailUrl, post.mediaUrl))}" alt="Video" loading="lazy" onerror="this.onerror=null; this.src='https://via.placeholder.com/640x360/1a1a1a/ffffff?text=Video'; this.style.objectFit='contain';">
+          <div class="fb-video-overlay"></div>
+          <div class="fb-play-btn">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          ${videoDuration ? `<div class="fb-duration">${videoDuration}</div>` : ''}
+        </div>
+      `;
+    } else {
+      mediaHtml = `<img src="${escapeHtml(post.mediaUrl)}" alt="Post Image" class="post-image" loading="lazy">`;
+    }
+  }
 
   div.innerHTML = `
     <div class="post-header">
@@ -662,6 +1089,36 @@ function createPostElement(post) {
   `;
 
   return div;
+}
+
+function formatDuration(seconds) {
+  if (!seconds || seconds <= 0) return '';
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${s.toString().padStart(2, '0')}`;
+}
+
+// Generate Cloudinary thumbnail URL from video URL
+function getCloudinaryThumbnail(thumbnailUrl, mediaUrl) {
+  // If explicit thumbnail URL exists, use it
+  if (thumbnailUrl) return thumbnailUrl;
+
+  // If it's a Cloudinary URL, convert to thumbnail
+  if (mediaUrl && mediaUrl.includes('cloudinary.com')) {
+    // Extract the base path and convert
+    // From: .../video/upload/v123/folder/video.mp4
+    // To:   .../video/upload/w_640,h_360,c_fill,so_0/folder/video.jpg
+    return mediaUrl
+      .replace('/video/upload/', '/video/upload/w_640,h_360,c_fill,so_0/')
+      .replace('.mp4', '.jpg')
+      .replace('.mov', '.jpg')
+      .replace('.avi', '.jpg')
+      .replace('.mkv', '.jpg')
+      .replace('.webm', '.jpg');
+  }
+
+  // Fallback: try replacing extension with jpg
+  return mediaUrl ? mediaUrl.replace(/\.[^\/.]+$/, '.jpg') : '';
 }
 
 function getTimeAgo(timestamp) {
@@ -831,6 +1288,14 @@ window.openCreatePost = function() {
 };
 
 // ═══════════════════════════════════════════════════════════
+// PROFILE NAVIGATION
+// ═══════════════════════════════════════════════════════════
+
+window.goToProfile = function() {
+  window.location.href = '/profile';
+};
+
+// ═══════════════════════════════════════════════════════════
 // SEARCH
 // ═══════════════════════════════════════════════════════════
 
@@ -950,7 +1415,7 @@ window.renderSearchHistory = function() {
   }
   title.style.display = 'block';
   container.innerHTML = list.map((item, idx) => `
-    <div class="search-history-item" onclick="document.getElementById('searchInput').value='${item.replace(/'/g, "\'")}';handleSearch('${item.replace(/'/g, "\'")}');addSearchHistory('${item.replace(/'/g, "\'")}');">
+    <div class="search-history-item" onclick="document.getElementById('searchInput').value='${item.replace(/'/g, "'")}';handleSearch('${item.replace(/'/g, "'")}');addSearchHistory('${item.replace(/'/g, "'")}');">
       <div class="search-history-icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
       </div>
@@ -1017,7 +1482,418 @@ document.getElementById('postOptionsSheet').addEventListener('click', function(e
 const st = document.createElement('style');
 st.textContent = '@keyframes fadeInUp{from{transform:translateX(-50%) translateY(20px);opacity:0}to{transform:translateX(-50%) translateY(0);opacity:1}}@keyframes fadeOut{from{opacity:1}to{opacity:0}}';
 document.head.appendChild(st);
+
+
+// ═══════════════════════════════════════════════════════════
+// FULL SCREEN VIDEO PLAYER (Reels Style)
+// ═══════════════════════════════════════════════════════════
+
+let playerCurrentPost = null;
+let playerCurrentIndex = 0;
+let playerPostList = [];
+let playerVideoElement = null;
+
+window.openVideoPlayer = function(postId, ownerUid) {
+  // Find the post
+  const post = allPosts.find(p => p.id === postId && p.ownerUid === ownerUid);
+  if (!post || post.mediaType !== 'video') return;
+
+  // Build list of video posts for vertical scrolling
+  playerPostList = allPosts.filter(p => p.mediaType === 'video');
+  playerCurrentIndex = playerPostList.findIndex(p => p.id === postId && p.ownerUid === ownerUid);
+  if (playerCurrentIndex === -1) playerCurrentIndex = 0;
+
+  playerCurrentPost = post;
+
+  const overlay = document.getElementById('videoPlayerOverlay');
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  loadPlayerPost(playerCurrentIndex);
+
+  // Enable swipe gestures
+  enablePlayerSwipe();
+};
+
+function loadPlayerPost(index) {
+  if (index < 0 || index >= playerPostList.length) return;
+
+  playerCurrentIndex = index;
+  playerCurrentPost = playerPostList[index];
+  const post = playerCurrentPost;
+
+  const video = document.getElementById('reelsVideo');
+  const avatar = document.getElementById('playerAvatar');
+  const authorName = document.getElementById('playerAuthorName');
+  const uploadTime = document.getElementById('playerUploadTime');
+  const caption = document.getElementById('playerCaption');
+  const likeBtn = document.getElementById('playerLikeBtn');
+  const likeCount = document.getElementById('playerLikeCount');
+  const commentCount = document.getElementById('playerCommentCount');
+  const repostCount = document.getElementById('playerRepostCount');
+  const pauseIcon = document.getElementById('videoPauseIcon');
+
+  // Reset pause icon
+  if (pauseIcon) pauseIcon.classList.remove('active');
+
+  // Set video source and autoplay
+  // Ensure Cloudinary video URL is properly formatted
+  let videoUrl = post.mediaUrl || '';
+  video.src = videoUrl;
+  video.muted = true; // Start muted for autoplay
+  video.playsInline = true;
+  video.loop = true;
+  video.load();
+
+  // Try autoplay
+  const playPromise = video.play();
+  if (playPromise !== undefined) {
+    playPromise.catch(() => {
+      // Autoplay blocked, show play button or try muted
+      video.muted = true;
+      video.play().catch(() => {});
+    });
+  }
+
+  // Update sound button to show muted state
+  updateSoundButtonState(true);
+
+  // Update info
+  avatar.src = post.authorAvatar || 'https://i.pravatar.cc/150?img=11';
+  avatar.onerror = () => { avatar.src = 'https://i.pravatar.cc/150?img=11'; };
+  authorName.textContent = post.authorName || 'User';
+  uploadTime.textContent = getTimeAgo(post.timestamp);
+  caption.textContent = post.caption || '';
+
+  // Update counts
+  const likes = post.likes ? Object.keys(post.likes).length : 0;
+  const comments = post.comments ? Object.keys(post.comments).length : 0;
+  const shares = post.shares || 0;
+  likeCount.textContent = likes;
+  commentCount.textContent = comments;
+  repostCount.textContent = shares;
+
+  // Update like button state
+  const isLiked = post.likes && post.likes[currentUser?.uid];
+  if (isLiked) {
+    likeBtn.classList.add('liked');
+  } else {
+    likeBtn.classList.remove('liked');
+  }
+
+  // Progress bar
+  updatePlayerProgress();
+}
+
+// Toggle play/pause
+window.togglePlayerPlayPause = function() {
+  const video = document.getElementById('reelsVideo');
+  const pauseIcon = document.getElementById('videoPauseIcon');
+  if (!video) return;
+
+  if (video.paused) {
+    video.play().catch(() => {});
+    if (pauseIcon) pauseIcon.classList.remove('active');
+  } else {
+    video.pause();
+    if (pauseIcon) {
+      pauseIcon.classList.add('active');
+      setTimeout(() => pauseIcon.classList.remove('active'), 800);
+    }
+  }
+};
+
+// Toggle sound
+window.togglePlayerSound = function() {
+  const video = document.getElementById('reelsVideo');
+  if (!video) return;
+  video.muted = !video.muted;
+  updateSoundButtonState(video.muted);
+};
+
+function updateSoundButtonState(isMuted) {
+  const soundOff = document.getElementById('soundOffIcon');
+  const soundOn = document.getElementById('soundOnIcon');
+  if (!soundOff || !soundOn) return;
+  if (isMuted) {
+    soundOff.style.display = 'block';
+    soundOn.style.display = 'none';
+  } else {
+    soundOff.style.display = 'none';
+    soundOn.style.display = 'block';
+  }
+}
+
+function updatePlayerProgress() {
+  const video = document.getElementById('reelsVideo');
+  const progressFill = document.getElementById('videoProgressFill');
+  if (!video || !progressFill) return;
+
+  video.ontimeupdate = () => {
+    if (video.duration) {
+      const pct = (video.currentTime / video.duration) * 100;
+      progressFill.style.width = pct + '%';
+    }
+  };
+
+  video.onended = () => {
+    progressFill.style.width = '100%';
+    // Auto advance to next video after a short delay
+    setTimeout(() => {
+      if (playerCurrentIndex < playerPostList.length - 1) {
+        loadPlayerPost(playerCurrentIndex + 1);
+      }
+    }, 500);
+  };
+}
+
+window.closeVideoPlayer = function() {
+  const overlay = document.getElementById('videoPlayerOverlay');
+  const video = document.getElementById('reelsVideo');
+  const pauseIcon = document.getElementById('videoPauseIcon');
+
+  overlay.classList.remove('active');
+  document.body.style.overflow = '';
+
+  if (video) {
+    video.pause();
+    video.src = '';
+    video.load();
+  }
+
+  if (pauseIcon) pauseIcon.classList.remove('active');
+
+  playerCurrentPost = null;
+  playerPostList = [];
+  playerCurrentIndex = 0;
+  disablePlayerSwipe();
+};
+
+window.playerToggleLike = async function() {
+  if (!playerCurrentPost || !currentUser) return;
+  const post = playerCurrentPost;
+  const likeRef = ref(db, `posts/${post.ownerUid}/${post.id}/likes/${currentUser.uid}`);
+  const snap = await get(likeRef);
+  const likeBtn = document.getElementById('playerLikeBtn');
+  const likeCount = document.getElementById('playerLikeCount');
+
+  if (snap.exists()) {
+    await remove(likeRef);
+    likeBtn.classList.remove('liked');
+    const count = parseInt(likeCount.textContent) - 1;
+    likeCount.textContent = Math.max(0, count);
+    // Also update the feed button if visible
+    updateFeedLikeUI(post.id, post.ownerUid, false);
+  } else {
+    await set(likeRef, true);
+    likeBtn.classList.add('liked');
+    const count = parseInt(likeCount.textContent) + 1;
+    likeCount.textContent = count;
+    updateFeedLikeUI(post.id, post.ownerUid, true);
+  }
+};
+
+function updateFeedLikeUI(postId, ownerUid, isLiked) {
+  const feedBtn = document.querySelector(`.post-card[data-post-id="${postId}"][data-owner-uid="${ownerUid}"] .action-btn`);
+  if (feedBtn) {
+    if (isLiked) {
+      feedBtn.classList.add('liked');
+      feedBtn.querySelector('i').classList.remove('far');
+      feedBtn.querySelector('i').classList.add('fas');
+    } else {
+      feedBtn.classList.remove('liked');
+      feedBtn.querySelector('i').classList.remove('fas');
+      feedBtn.querySelector('i').classList.add('far');
+    }
+  }
+}
+
+window.playerOpenComments = function() {
+  if (playerCurrentPost) {
+    openComments(playerCurrentPost.id, playerCurrentPost.ownerUid);
+  }
+};
+
+window.playerRepost = function() {
+  if (playerCurrentPost) {
+    sharePost(playerCurrentPost.id, playerCurrentPost.ownerUid);
+  }
+};
+
+window.playerShare = function() {
+  if (playerCurrentPost) {
+    const url = `${window.location.origin}/post?uid=${playerCurrentPost.ownerUid}&id=${playerCurrentPost.id}`;
+    navigator.clipboard.writeText(url).then(() => showToast('Link copied!'));
+  }
+};
+
+window.playerMoreOptions = function() {
+  if (playerCurrentPost) {
+    openPostOptions(playerCurrentPost.id, playerCurrentPost.ownerUid);
+  }
+};
+
+window.openPlayerMoreOptions = function() {
+  playerMoreOptions();
+};
+
+// ═══════════════════════════════════════════════════════════
+// SWIPE GESTURES FOR VIDEO PLAYER
+// ═══════════════════════════════════════════════════════════
+
+let playerTouchStartY = 0;
+let playerTouchEndY = 0;
+let playerSwipeHandler = null;
+
+function enablePlayerSwipe() {
+  const container = document.getElementById('videoPlayerContainer');
+  if (!container) return;
+
+  playerSwipeHandler = function(e) {
+    playerTouchStartY = e.changedTouches[0].screenY;
+  };
+
+  container.addEventListener('touchstart', playerSwipeHandler, { passive: true });
+
+  container.addEventListener('touchend', function(e) {
+    playerTouchEndY = e.changedTouches[0].screenY;
+    handlePlayerSwipe();
+  }, { passive: true });
+
+  // Also support wheel scroll for desktop
+  container.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    if (e.deltaY > 50) {
+      // Scroll down - next video
+      if (playerCurrentIndex < playerPostList.length - 1) {
+        loadPlayerPost(playerCurrentIndex + 1);
+      }
+    } else if (e.deltaY < -50) {
+      // Scroll up - previous video
+      if (playerCurrentIndex > 0) {
+        loadPlayerPost(playerCurrentIndex - 1);
+      }
+    }
+  }, { passive: false });
+}
+
+function disablePlayerSwipe() {
+  const container = document.getElementById('videoPlayerContainer');
+  if (!container || !playerSwipeHandler) return;
+  container.removeEventListener('touchstart', playerSwipeHandler);
+  playerSwipeHandler = null;
+}
+
+function handlePlayerSwipe() {
+  const swipeThreshold = 80;
+  const diff = playerTouchStartY - playerTouchEndY;
+
+  if (Math.abs(diff) > swipeThreshold) {
+    if (diff > 0) {
+      // Swiped up - next video
+      if (playerCurrentIndex < playerPostList.length - 1) {
+        loadPlayerPost(playerCurrentIndex + 1);
+      }
+    } else {
+      // Swiped down - previous video
+      if (playerCurrentIndex > 0) {
+        loadPlayerPost(playerCurrentIndex - 1);
+      }
+    }
+  }
+}
+
+// Close player on back button (Android)
+window.addEventListener('popstate', function(e) {
+  const overlay = document.getElementById('videoPlayerOverlay');
+  if (overlay && overlay.classList.contains('active')) {
+    closeVideoPlayer();
+    e.preventDefault();
+  }
+});
+
 </script>
+
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     FULL SCREEN VIDEO PLAYER (Reels Style)
+     ═══════════════════════════════════════════════════════════ -->
+<div class="video-player-overlay" id="videoPlayerOverlay">
+  <div class="video-player-container" id="videoPlayerContainer">
+    <video id="reelsVideo" playsinline loop preload="auto"></video>
+
+    <!-- Tap to pause/play overlay -->
+    <div class="video-tap-area" id="videoTapArea" onclick="togglePlayerPlayPause()"></div>
+
+    <!-- Top bar -->
+    <div class="video-player-top-bar">
+      <button class="video-player-back" onclick="closeVideoPlayer()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="video-player-title" id="videoPlayerTitle">Reels</div>
+      <button class="video-player-more" onclick="openPlayerMoreOptions()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="12" cy="19" r="1.5" fill="currentColor"/></svg>
+      </button>
+    </div>
+
+    <!-- Sound toggle -->
+    <button class="video-sound-btn" id="videoSoundBtn" onclick="togglePlayerSound()">
+      <svg id="soundOffIcon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+      <svg id="soundOnIcon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+    </button>
+
+    <!-- Pause overlay icon -->
+    <div class="video-pause-icon" id="videoPauseIcon">
+      <svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+    </div>
+
+    <!-- Right side actions -->
+    <div class="video-actions-sidebar" id="videoActionsSidebar">
+      <div class="video-action-btn" id="playerLikeBtn" onclick="playerToggleLike()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span id="playerLikeCount">0</span>
+      </div>
+      <div class="video-action-btn" onclick="playerOpenComments()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        <span id="playerCommentCount">0</span>
+      </div>
+      <div class="video-action-btn" onclick="playerRepost()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+        <span id="playerRepostCount">0</span>
+      </div>
+      <div class="video-action-btn" onclick="playerShare()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98"/><path d="M15.41 6.51l-6.82 3.98"/></svg>
+        <span>Share</span>
+      </div>
+      <div class="video-action-btn" onclick="playerMoreOptions()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+        <span>More</span>
+      </div>
+    </div>
+
+    <!-- Bottom info -->
+    <div class="video-info-section">
+      <div class="video-info-row">
+        <div class="video-info-left">
+          <div class="video-info-author">
+            <img src="" alt="" class="video-info-avatar" id="playerAvatar">
+            <div class="video-info-name-wrap">
+              <div class="video-info-name" id="playerAuthorName">User</div>
+              <div class="video-info-time" id="playerUploadTime">Just now</div>
+            </div>
+          </div>
+          <div class="video-info-caption" id="playerCaption"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="video-progress-bar">
+      <div class="video-progress-fill" id="videoProgressFill"></div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

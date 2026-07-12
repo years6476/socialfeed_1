@@ -32,21 +32,23 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 .stories-wrapper{display:flex;gap:8px;padding:0 10px;min-width:max-content}
 
 /* Each card: fixed width so exactly 4 fit + half of 5th scrollable */
-.story-card{width:84px;height:118px;border-radius:12px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;background:#e8e8e8}
+.story-card{width:79px;height:128px;border-radius:12px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;background:#e8e8e8}
 .story-card img.story-thumb{width:100%;height:100%;object-fit:cover;display:block}
 /* dark gradient at bottom */
 .story-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:45%;background:linear-gradient(to top,rgba(0,0,0,0.55),transparent);border-radius:0 0 12px 12px;pointer-events:none}
 /* uploader profile pic — top left */
-.story-card .story-uploader-pic{position:absolute;top:6px;left:6px;width:26px;height:26px;border-radius:50%;border:2px solid #fff;object-fit:cover;z-index:2}
+.story-card .story-uploader-pic{position:absolute;top:6px;left:6px;width:26px;height:26px;border-radius:50%;border:2px solid #1565c0;object-fit:cover;z-index:2}
 /* uploader name — bottom */
 .story-card .story-uploader-name{position:absolute;bottom:6px;left:6px;right:6px;font-size:9px;font-weight:600;color:#fff;z-index:2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2}
 
 /* CREATE STORY card */
-.story-card.create-story-card{background:#f0f0f0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:10px}
-.story-card.create-story-card .create-avatar{width:100%;height:72%;object-fit:cover;position:absolute;top:0;left:0;border-radius:12px 12px 0 0}
-.story-card.create-story-card .create-plus-wrap{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);width:28px;height:28px;border-radius:50%;background:#29b6d8;display:flex;align-items:center;justify-content:center;border:3px solid #fff;z-index:2}
-.story-card.create-story-card .create-plus-wrap i{font-size:12px;color:#fff}
-.story-card.create-story-card .create-label{position:absolute;bottom:8px;left:0;right:0;text-align:center;font-size:9px;font-weight:600;color:#1a1a1a;z-index:2}
+.story-card.create-story-card{background:#e0e0e0;display:block}
+.story-card.create-story-card .create-avatar{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;display:block}
+/* gradient overlay bottom portion */
+.story-card.create-story-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:48%;background:linear-gradient(to top,rgba(0,0,0,0.6),transparent);pointer-events:none;z-index:1}
+.story-card.create-story-card .create-plus-wrap{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;background:#1565c0;display:flex;align-items:center;justify-content:center;border:2.5px solid #fff;z-index:2}
+.story-card.create-story-card .create-plus-wrap i{font-size:9px;color:#fff}
+.story-card.create-story-card .create-label{position:absolute;bottom:7px;left:0;right:0;text-align:center;font-size:9px;font-weight:600;color:#fff;z-index:2}
 
 
 
@@ -99,6 +101,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 .action-btn:hover{color:#1877f2}
 .action-btn i{font-size:22px}
 .action-btn svg{width:22px;height:22px}
+.action-btn.share-btn svg{width:30px;height:30px;stroke-width:1.3}
 .action-btn.liked{color:#ff3b30}
 .action-btn.liked i{font-weight:900}
 .action-btn.saved{color:#1877f2}
@@ -328,6 +331,57 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
   font-weight: 600;
   padding: 2px 6px;
   border-radius: 4px;
+}
+
+/* FEED VIDEO INLINE CONTROLS (time + mute) */
+.feed-video-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 10px 9px;
+  background: linear-gradient(to top, rgba(0,0,0,0.58), transparent);
+  border-radius: 0 0 10px 10px;
+  z-index: 6;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+.fb-video-thumb.is-playing .feed-video-controls {
+  opacity: 1;
+  pointer-events: all;
+}
+.feed-video-time {
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.4px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.55);
+  pointer-events: none;
+  line-height: 1;
+}
+.feed-video-mute-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.42);
+  backdrop-filter: blur(4px);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: all;
+  flex-shrink: 0;
+  padding: 0;
+}
+.feed-video-mute-btn svg {
+  color: #fff;
+  display: block;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -623,7 +677,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 
 <!-- Create Story Card -->
 <div class="story-card create-story-card" onclick="openStoryUpload()">
-  <img src="" alt="" class="create-avatar" id="createStoryAvatar">
+  <img src="https://i.ibb.co.com/4nYTdhL3/file-000000008794720b9f713c5bb9851e01.png" alt="" class="create-avatar" id="createStoryAvatar">
   <div class="create-plus-wrap"><i class="fas fa-plus"></i></div>
   <span class="create-label">Create Story</span>
 </div>
@@ -822,7 +876,6 @@ onAuthStateChanged(auth, async (user) => {
 
 function updateUserUI() {
   const avatar = currentUserData?.profilePhotoUrl || currentUser?.photoURL || 'https://i.pravatar.cc/150?img=11';
-  document.getElementById('createStoryAvatar').src = avatar;
   document.getElementById('userStoryAvatar').src = avatar;
   document.getElementById('headerProfilePic').src = avatar;
 }
@@ -858,11 +911,16 @@ function loadStories() {
         });
         if (latestOwn) {
           document.getElementById('userStory').style.display = 'block';
-          if (latestOwn.mediaUrl) document.getElementById('userStoryThumb').src = latestOwn.mediaUrl;
+          // Check all possible field names uploadMediaAndSave might use
+          const thumbUrl = latestOwn.mediaUrl || latestOwn.imageUrl || latestOwn.photoUrl
+                        || latestOwn.url || latestOwn.secure_url || latestOwn.image || '';
+          if (thumbUrl) document.getElementById('userStoryThumb').src = thumbUrl;
           const myAvatar = currentUserData?.profilePhotoUrl || currentUser.photoURL || latestOwn.avatarUrl || '';
           document.getElementById('userStoryAvatar').src = myAvatar;
           const myName = currentUserData?.displayName || currentUser.displayName || 'You';
           document.getElementById('userStoryName').textContent = myName;
+          // Debug: log actual Firebase data to find correct field name
+          console.log('[Story Debug] Firebase story data:', JSON.stringify(latestOwn));
         }
       }
 
@@ -900,7 +958,7 @@ function addStoryToUI(story) {
       avatarUrl = u.profilePhotoUrl || u.photoURL || u.avatar || u.photo || '';
     }
     const finalAvatar = avatarUrl || story.avatarUrl || 'https://i.pravatar.cc/150?img=11';
-    const thumbUrl = story.mediaUrl || finalAvatar;
+    const thumbUrl = story.mediaUrl || story.imageUrl || story.photoUrl || story.url || story.secure_url || story.image || finalAvatar;
 
     storyEl.innerHTML = `
       <img src="${escapeHtml(thumbUrl)}" alt="" class="story-thumb" onerror="this.src='https://i.pravatar.cc/150?img=11'">
@@ -909,7 +967,7 @@ function addStoryToUI(story) {
     `;
   }).catch(() => {
     const finalAvatar = story.avatarUrl || 'https://i.pravatar.cc/150?img=11';
-    const thumbUrl = story.mediaUrl || finalAvatar;
+    const thumbUrl = story.mediaUrl || story.imageUrl || story.photoUrl || story.url || story.secure_url || story.image || finalAvatar;
     storyEl.innerHTML = `
       <img src="${escapeHtml(thumbUrl)}" alt="" class="story-thumb" onerror="this.src='https://i.pravatar.cc/150?img=11'">
       <img src="${escapeHtml(finalAvatar)}" alt="" class="story-uploader-pic" onerror="this.src='https://i.pravatar.cc/150?img=11'">
@@ -969,7 +1027,8 @@ window.viewStory = function(uid, storyId) {
         name = u.displayName || u.name || name;
       }
 
-      document.getElementById('storyViewerImg').src = story.mediaUrl || '';
+      const storyImgUrl = story.mediaUrl || story.imageUrl || story.photoUrl || story.url || story.secure_url || story.image || '';
+      document.getElementById('storyViewerImg').src = storyImgUrl;
       document.getElementById('storyViewerAvatar').src = avatarUrl || 'https://i.pravatar.cc/150?img=11';
       document.getElementById('storyViewerName').textContent = name;
 
@@ -1216,6 +1275,28 @@ function renderPosts(posts) {
 
   // Feed video autoplay observer
   observeFeedVideos();
+
+  // View tracking observer
+  observePostViews();
+}
+
+let postViewObserver = null;
+const viewedPosts = new Set();
+
+function observePostViews() {
+  if (postViewObserver) postViewObserver.disconnect();
+  postViewObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const card = entry.target;
+      const postId = card.dataset.postId;
+      const ownerUid = card.dataset.ownerUid;
+      if (!postId || !ownerUid || viewedPosts.has(postId)) return;
+      viewedPosts.add(postId);
+      set(ref(db, `posts/${ownerUid}/${postId}/views/${currentUser.uid}`), true);
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('.post-card[data-post-id]').forEach(el => postViewObserver.observe(el));
 }
 
 function createPostElement(post) {
@@ -1239,7 +1320,7 @@ function createPostElement(post) {
       // Extract video duration or show a default
       const videoDuration = post.videoDuration ? formatDuration(post.videoDuration) : '';
       mediaHtml = `
-        <div class="fb-video-thumb" onclick="openVideoPlayer('${post.id}', '${post.ownerUid}')">
+        <div class="fb-video-thumb" onclick="toggleFeedVideo(this)">
           <video
             class="feed-video"
             data-src="${escapeHtml(post.mediaUrl)}"
@@ -1256,7 +1337,13 @@ function createPostElement(post) {
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4" d="M8 18V6l8 6-8 6Z"/>
             </svg>
           </div>
-          ${videoDuration ? `<div class="fb-duration">${videoDuration}</div>` : ''}
+          <div class="feed-video-controls">
+            <span class="feed-video-time">0:00 / 0:00</span>
+            <button class="feed-video-mute-btn" onclick="toggleFeedMute(event,this)">
+              <svg class="feed-mute-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+              <svg class="feed-unmute-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+            </button>
+          </div>
         </div>
       `;
     } else {
@@ -1281,20 +1368,26 @@ function createPostElement(post) {
     ${mediaHtml}
     <div class="post-actions">
       <div class="action-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike('${post.id}', '${post.ownerUid}', this)">
-        <i class="${isLiked ? 'fas' : 'far'} fa-heart"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="${isLiked ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         <span>${likeCount}</span>
       </div>
       <div class="action-btn" onclick="openComments('${post.id}', '${post.ownerUid}')">
-        <i class="far fa-comment"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
         <span>${commentCount}</span>
       </div>
-      <div class="action-btn" onclick="sharePost('${post.id}', '${post.ownerUid}')">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5v10"/><path d="M5 5l-3 3"/><path d="M5 5l3 3"/><path d="M19 19V9"/><path d="M19 19l-3-3"/><path d="M19 19l3-3"/><path d="M5 15c0 2.4 1.8 4 4.5 4H11"/><path d="M19 9c0-2.4-1.8-4-4.5-4H13"/></svg>
+      <div class="action-btn" onclick="repostPost('${post.id}', '${post.ownerUid}')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5v10"/><path d="M5 5l-3 3"/><path d="M5 5l3 3"/><path d="M19 19V9"/><path d="M19 19l-3-3"/><path d="M19 19l3-3"/><path d="M5 15c0 2.4 1.8 4 4.5 4H11"/><path d="M19 9c0-2.4-1.8-4-4.5-4H13"/></svg>
+      </div>
+      <div class="action-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M4 4.5V19a1 1 0 0 0 1 1h15M7 14l4-4 4 4 5-5m0 0h-3.207M20 9v3.207"/></svg>
+        <span>${post.views ? Object.keys(post.views).length : 0}</span>
+      </div>
+      <div class="action-btn share-btn" onclick="sharePost('${post.id}', '${post.ownerUid}')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" d="m15.141 6 5.518 4.95a1.05 1.05 0 0 1 0 1.549l-5.612 5.088m-6.154-3.214v1.615a.95.95 0 0 0 1.525.845l5.108-4.251a1.1 1.1 0 0 0 0-1.646l-5.108-4.251a.95.95 0 0 0-1.525.846v1.7c-3.312 0-6 2.979-6 6.654v1.329a.7.7 0 0 0 1.344.353 5.174 5.174 0 0 1 4.652-3.191l.004-.003Z"/></svg>
         <span>${shareCount}</span>
       </div>
-      <div class="action-btn"><i class="far fa-paper-plane"></i></div>
       <div class="action-btn save-btn ${isSaved ? 'saved' : ''}" onclick="toggleSave('${post.id}', '${post.ownerUid}', this)">
-        <i class="${isSaved ? 'fas' : 'far'} fa-bookmark"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="${isSaved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
       </div>
     </div>
   `;
@@ -1313,6 +1406,69 @@ function setFeedPlayIcon(thumb, playing) {
   icon.style.pointerEvents = playing ? 'none' : '';
 }
 
+// ─── Inline feed video: play/pause toggle ────────────────────
+window.toggleFeedVideo = function(thumbEl) {
+  const video = thumbEl.querySelector('.feed-video');
+  if (!video) return;
+  if (!video.src && video.dataset.src) {
+    video.src = video.dataset.src;
+    video.load();
+  }
+  if (video.paused) {
+    video.play().then(() => {
+      thumbEl.classList.add('is-playing');
+      setFeedPlayIcon(thumbEl, true);
+      startFeedVideoTimeUpdate(thumbEl, video);
+      updateFeedMuteIcon(thumbEl, video.muted);
+    }).catch(() => {});
+  } else {
+    video.pause();
+    thumbEl.classList.remove('is-playing');
+    setFeedPlayIcon(thumbEl, false);
+  }
+};
+
+// ─── Inline feed video: mute toggle ─────────────────────────
+window.toggleFeedMute = function(e, btn) {
+  e.stopPropagation();
+  const thumb = btn.closest('.fb-video-thumb');
+  const video = thumb ? thumb.querySelector('.feed-video') : null;
+  if (!video) return;
+  video.muted = !video.muted;
+  updateFeedMuteIcon(thumb, video.muted);
+};
+
+function updateFeedMuteIcon(thumb, isMuted) {
+  const muteIc   = thumb.querySelector('.feed-mute-icon');
+  const unmuteIc = thumb.querySelector('.feed-unmute-icon');
+  if (muteIc)   muteIc.style.display   = isMuted ? '' : 'none';
+  if (unmuteIc) unmuteIc.style.display = isMuted ? 'none' : '';
+}
+
+// ─── Inline feed video: live time counter ───────────────────
+function formatVideoTime(sec) {
+  if (!sec || isNaN(sec)) sec = 0;
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60);
+  return m + ':' + String(s).padStart(2, '0');
+}
+
+function startFeedVideoTimeUpdate(thumb, video) {
+  const timeEl = thumb.querySelector('.feed-video-time');
+  if (!timeEl) return;
+  if (video._feedTimeHandler) {
+    video.removeEventListener('timeupdate', video._feedTimeHandler);
+  }
+  function tick() {
+    const cur = formatVideoTime(video.currentTime);
+    const dur = isNaN(video.duration) ? '0:00' : formatVideoTime(video.duration);
+    timeEl.textContent = cur + ' / ' + dur;
+  }
+  video._feedTimeHandler = tick;
+  video.addEventListener('timeupdate', tick);
+  tick();
+}
+
 function initFeedVideoObserver() {
   feedVideoObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1328,16 +1484,22 @@ function initFeedVideoObserver() {
         video.muted = true;
         video.play().then(() => {
           setFeedPlayIcon(thumb, true);
+          thumb.classList.add('is-playing');
+          startFeedVideoTimeUpdate(thumb, video);
+          updateFeedMuteIcon(thumb, true);
         }).catch(() => {
           setFeedPlayIcon(thumb, false);
+          thumb.classList.remove('is-playing');
         });
       } else {
         if (!video.paused) video.pause();
         setFeedPlayIcon(thumb, false);
+        thumb.classList.remove('is-playing');
       }
     });
   }, { threshold: [0, 0.8] });
 }
+
 
 function observeFeedVideos() {
   if (!feedVideoObserver) initFeedVideoObserver();
@@ -1403,14 +1565,14 @@ window.toggleLike = async function(postId, ownerUid, btn) {
   const isCurrentlyLiked = snap.exists();
   if (isCurrentlyLiked) {
     btn.classList.remove('liked');
-    btn.querySelector('i').classList.remove('fas');
-    btn.querySelector('i').classList.add('far');
+    const svg = btn.querySelector('svg');
+    if (svg) svg.setAttribute('fill', 'none');
     const count = parseInt(btn.querySelector('span').textContent) - 1;
     btn.querySelector('span').textContent = Math.max(0, count);
   } else {
     btn.classList.add('liked');
-    btn.querySelector('i').classList.remove('far');
-    btn.querySelector('i').classList.add('fas');
+    const svg = btn.querySelector('svg');
+    if (svg) svg.setAttribute('fill', 'currentColor');
     const count = parseInt(btn.querySelector('span').textContent) + 1;
     btn.querySelector('span').textContent = count;
   }
@@ -1438,12 +1600,12 @@ window.toggleSave = async function(postId, ownerUid, btn) {
   const isCurrentlySaved = snap.exists();
   if (isCurrentlySaved) {
     btn.classList.remove('saved');
-    btn.querySelector('i').classList.remove('fas');
-    btn.querySelector('i').classList.add('far');
+    const svg = btn.querySelector('svg');
+    if (svg) svg.setAttribute('fill', 'none');
   } else {
     btn.classList.add('saved');
-    btn.querySelector('i').classList.remove('far');
-    btn.querySelector('i').classList.add('fas');
+    const svg = btn.querySelector('svg');
+    if (svg) svg.setAttribute('fill', 'currentColor');
   }
 
   // savedPosts path is outside 'posts', so onValue won't fire — no skip needed.
@@ -1457,15 +1619,41 @@ window.toggleSave = async function(postId, ownerUid, btn) {
 
 window.sharePost = async function(postId, ownerUid) {
   if (!currentUser) return;
+  const postUrl = `${window.location.origin}/post?uid=${ownerUid}&id=${postId}`;
   try {
+    if (navigator.share) {
+      await navigator.share({ url: postUrl });
+    } else {
+      await navigator.clipboard.writeText(postUrl);
+      showToast('Link copied!');
+    }
     const shareRef = ref(db, `posts/${ownerUid}/${postId}/shares`);
     const snap = await get(shareRef);
     const currentShares = snap.exists() ? (snap.val() || 0) : 0;
     await set(shareRef, currentShares + 1);
-    showToast('Post shared!');
+  } catch (err) {
+    if (err.name !== 'AbortError') {
+      console.error(err);
+      showToast('Share failed');
+    }
+  }
+};
+
+window.repostPost = async function(postId, ownerUid) {
+  if (!currentUser) return;
+  try {
+    const repostRef = ref(db, `posts/${ownerUid}/${postId}/reposts/${currentUser.uid}`);
+    const snap = await get(repostRef);
+    if (snap.exists()) {
+      await remove(repostRef);
+      showToast('Repost removed');
+    } else {
+      await set(repostRef, true);
+      showToast('Reposted!');
+    }
   } catch (err) {
     console.error(err);
-    showToast('Share failed');
+    showToast('Repost failed');
   }
 };
 
@@ -1756,7 +1944,10 @@ let playerPostList = [];
 let playerVideoElement = null;
 
 window.openVideoPlayer = function(postId, ownerUid) {
-  // Find the post
+  // Fullscreen player removed — videos play inline in feed
+};
+window._openVideoPlayerFull = function(postId, ownerUid) {
+  // (disabled) was fullscreen reels player
   const post = allPosts.find(p => p.id === postId && p.ownerUid === ownerUid);
   if (!post || post.mediaType !== 'video') return;
 

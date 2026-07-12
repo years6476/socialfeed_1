@@ -18,32 +18,41 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 .menu-btn{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s;margin-left:-4px}
 .menu-btn:hover{background:#f0f0f0}
 .menu-btn i{font-size:22px;color:#333}
-.logo{height:30px;width:auto;object-fit:contain}
+.logo{height:36px;width:auto;object-fit:contain}
 .header-right{display:flex;align-items:center;gap:10px}
 .header-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s;position:relative}
 .header-icon:hover{background:#f0f0f0}
 .header-icon i{font-size:20px;color:#333}
 .notification-badge{position:absolute;top:4px;right:4px;width:8px;height:8px;background:#ff3b30;border-radius:50%;border:2px solid #fff}
 
-/* STORIES - SMALLER */
-.stories-container{background:#fff;padding:4px 0 8px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;border-bottom:none}
+
+/* STORIES - CARD STYLE */
+.stories-container{background:#fff;padding:8px 0 10px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
 .stories-container::-webkit-scrollbar{display:none}
 .stories-wrapper{display:flex;gap:8px;padding:0 10px;min-width:max-content}
-.story-item{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex-shrink:0}
-.create-story .story-ring{width:58px;height:58px;border-radius:50%;position:relative;overflow:visible}
-.create-story .story-avatar{width:58px;height:58px;border-radius:50%;object-fit:cover;border:2px solid #e0e0e0}
-.create-story .add-btn{position:absolute;bottom:-1px;right:-1px;width:18px;height:18px;background:#1877f2;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #fff;color:#fff;font-size:8px}
-.story-label{font-size:9px;color:#333;font-weight:500;white-space:nowrap;max-width:58px;overflow:visible;text-overflow:clip}
-.story-ring{width:58px;height:58px;border-radius:50%;padding:2px;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center}
-.story-ring.seen{background:#ccc}
-.story-ring-inner{width:100%;height:100%;border-radius:50%;background:#fff;padding:2px;display:flex;align-items:center;justify-content:center}
-.story-avatar{width:100%;height:100%;border-radius:50%;object-fit:cover}
+
+/* Each card: fixed width so exactly 4 fit + half of 5th scrollable */
+.story-card{width:84px;height:118px;border-radius:12px;overflow:hidden;position:relative;cursor:pointer;flex-shrink:0;background:#e8e8e8}
+.story-card img.story-thumb{width:100%;height:100%;object-fit:cover;display:block}
+/* dark gradient at bottom */
+.story-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:45%;background:linear-gradient(to top,rgba(0,0,0,0.55),transparent);border-radius:0 0 12px 12px;pointer-events:none}
+/* uploader profile pic — top left */
+.story-card .story-uploader-pic{position:absolute;top:6px;left:6px;width:26px;height:26px;border-radius:50%;border:2px solid #fff;object-fit:cover;z-index:2}
+/* uploader name — bottom */
+.story-card .story-uploader-name{position:absolute;bottom:6px;left:6px;right:6px;font-size:9px;font-weight:600;color:#fff;z-index:2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2}
+
+/* CREATE STORY card */
+.story-card.create-story-card{background:#f0f0f0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:10px}
+.story-card.create-story-card .create-avatar{width:100%;height:72%;object-fit:cover;position:absolute;top:0;left:0;border-radius:12px 12px 0 0}
+.story-card.create-story-card .create-plus-wrap{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);width:28px;height:28px;border-radius:50%;background:#29b6d8;display:flex;align-items:center;justify-content:center;border:3px solid #fff;z-index:2}
+.story-card.create-story-card .create-plus-wrap i{font-size:12px;color:#fff}
+.story-card.create-story-card .create-label{position:absolute;bottom:8px;left:0;right:0;text-align:center;font-size:9px;font-weight:600;color:#1a1a1a;z-index:2}
 
 
 
 /* TABS - Black text and underline */
 .tabs-container{display:flex;align-items:center;justify-content:center;gap:28px;padding:0 12px;background:#fff}
-.tab-item{position:relative;padding:10px 0;font-size:14px;font-weight:600;color:#888;cursor:pointer;transition:color .2s;white-space:nowrap}
+.tab-item{position:relative;padding:4px 0;font-size:14px;font-weight:600;color:#888;cursor:pointer;transition:color .2s;white-space:nowrap}
 .tab-item.active{color:#1a1a1a}
 .tab-item::after{content:'';position:absolute;bottom:0;left:-4px;right:-4px;height:2px;background:#1a1a1a;border-radius:1px;transform:scaleX(0);transition:transform .25s ease}
 .tab-item.active::after{transform:scaleX(1)}
@@ -121,7 +130,25 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 .plus-circle{width:32px;height:32px;background:#1a1a1a;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff}
 .plus-circle i{font-size:14px}
 
-/* SEARCH OVERLAY */
+/* STORY VIEWER - FULLSCREEN */
+.story-viewer{position:fixed;top:0;left:0;right:0;bottom:0;background:#000;z-index:9000;display:none;flex-direction:column}
+.story-viewer.active{display:flex}
+.story-viewer-bg{flex:1;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.story-viewer-img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+/* progress bar */
+.story-progress{position:absolute;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.3);z-index:2}
+.story-progress-fill{height:100%;background:#fff;width:0%;transition:width linear}
+/* top bar */
+.story-viewer-top{position:absolute;top:10px;left:0;right:0;display:flex;align-items:center;padding:0 14px;gap:10px;z-index:3}
+.story-viewer-avatar{width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid #fff;flex-shrink:0}
+.story-viewer-name{color:#fff;font-size:13px;font-weight:600;flex:1}
+.story-viewer-time{color:rgba(255,255,255,0.7);font-size:11px}
+.story-viewer-close{width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:20px;flex-shrink:0}
+/* delete button — only for own stories */
+.story-viewer-delete{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);background:rgba(220,38,38,0.85);color:#fff;border:none;border-radius:20px;padding:10px 28px;font-size:13px;font-weight:600;cursor:pointer;display:none;z-index:3;backdrop-filter:blur(4px)}
+.story-viewer-delete.visible{display:block}
+
+
 .search-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#fff;z-index:5000;display:none;flex-direction:column;animation:fadeIn .2s ease}
 .search-overlay.active{display:flex}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -570,47 +597,16 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 <!-- FIXED HEADER -->
 <header class="header" id="mainHeader" style="position:fixed;top:0;left:0;right:0;z-index:1100;background:#fff;">
 <div class="header-left">
-<img src="" alt="Profile" id="headerProfilePic" onclick="goToProfile()" style="width:27px;height:27px;border-radius:50%;object-fit:cover;cursor:pointer;">
+<img src="" alt="Profile" id="headerProfilePic" onclick="goToProfile()" style="width:34px;height:34px;border-radius:50%;object-fit:cover;cursor:pointer;">
 </div>
 <div class="header-center">
 <img src="https://i.ibb.co.com/fcF3HyJ/file-000000002eac71fa8256c548585d5f0c.png" alt="App Logo" class="logo" id="appLogo" onerror="this.src='https://via.placeholder.com/120x36?text=SocialApp'">
 </div>
 <div class="header-right">
-<div class="header-icon" onclick="openSearch()" style="display:flex;align-items:center;justify-content:center"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
-<div class="header-icon" onclick="openNotifications()" style="display:flex;align-items:center;justify-content:center;position:relative;"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5.365V3m0 2.365a5.338 5.338 0 0 1 5.133 5.368v1.8c0 2.386 1.867 2.982 1.867 4.175 0 .593 0 1.292-.538 1.292H5.538C5 18 5 17.301 5 16.708c0-1.193 1.867-1.789 1.867-4.175v-1.8A5.338 5.338 0 0 1 12 5.365ZM8.733 18c.094.852.306 1.54.944 2.112a3.48 3.48 0 0 0 4.646 0c.638-.572 1.236-1.26 1.33-2.112h-6.92Z"/></svg><span class="notification-badge" id="notifBadge" style="display:none"></span></div>
+<div class="header-icon" onclick="openSearch()" style="display:flex;align-items:center;justify-content:center"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
+<div class="header-icon" onclick="openNotifications()" style="display:flex;align-items:center;justify-content:center;position:relative;"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5.365V3m0 2.365a5.338 5.338 0 0 1 5.133 5.368v1.8c0 2.386 1.867 2.982 1.867 4.175 0 .593 0 1.292-.538 1.292H5.538C5 18 5 17.301 5 16.708c0-1.193 1.867-1.789 1.867-4.175v-1.8A5.338 5.338 0 0 1 12 5.365ZM8.733 18c.094.852.306 1.54.944 2.112a3.48 3.48 0 0 0 4.646 0c.638-.572 1.236-1.26 1.33-2.112h-6.92Z"/></svg><span class="notification-badge" id="notifBadge" style="display:none"></span></div>
 </div>
 </header>
-
-<!-- SCROLL HIDE ZONE: stories only -->
-<div id="scrollHideZone" style="margin-top:48px;">
-<!-- STORIES -->
-<div class="stories-container">
-<div class="stories-wrapper" id="storiesWrapper">
-
-<!-- Create Story - NO RING -->
-<div class="story-item create-story" onclick="openStoryUpload()">
-<div class="story-ring" style="background:transparent;padding:0">
-<img src="" alt="Your Profile" class="story-avatar" id="createStoryAvatar" style="width:58px;height:58px;border-radius:50%;object-fit:cover;border:2px solid #e0e0e0">
-<div class="add-btn"><i class="fas fa-plus"></i></div>
-</div>
-<span class="story-label">Create Story</span>
-</div>
-
-<!-- User's Story (hidden by default) -->
-<div class="story-item" id="userStory" style="display:none" onclick="viewStory('user')">
-<div class="story-ring"><div class="story-ring-inner"><img src="" alt="You" class="story-avatar" id="userStoryAvatar"></div></div>
-<span class="story-label">You</span>
-</div>
-
-<!-- Loading skeleton for stories -->
-<div class="story-item story-skeleton-item" id="storySkeleton" style="display:none">
-<div class="story-skeleton"></div>
-<span class="story-label" style="color:transparent">Loading</span>
-</div>
-
-</div>
-</div>
-</div>
 
 <!-- STICKY TABS (sticks below fixed header) -->
 <div class="tabs-container" id="tabsContainer" style="position:sticky;top:48px;z-index:1050;background:#fff;">
@@ -618,6 +614,31 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 <div class="tab-item" onclick="switchTab(this,'following')">Following</div>
 <div class="tab-item" onclick="switchTab(this,'group')">Group</div>
 </div>
+
+<!-- SCROLL HIDE ZONE: stories only -->
+<div id="scrollHideZone" style="margin-top:48px;">
+<!-- STORIES -->
+<div class="stories-container">
+<div class="stories-wrapper" id="storiesWrapper">
+
+<!-- Create Story Card -->
+<div class="story-card create-story-card" onclick="openStoryUpload()">
+  <img src="" alt="" class="create-avatar" id="createStoryAvatar">
+  <div class="create-plus-wrap"><i class="fas fa-plus"></i></div>
+  <span class="create-label">Create Story</span>
+</div>
+
+<!-- User's own story (hidden by default) -->
+<div class="story-card" id="userStory" style="display:none" onclick="viewStory('user')">
+  <img src="" alt="" class="story-thumb" id="userStoryThumb">
+  <img src="" alt="" class="story-uploader-pic" id="userStoryAvatar">
+  <span class="story-uploader-name" id="userStoryName">You</span>
+</div>
+
+</div>
+</div>
+</div>
+
 
 <!-- STORY UPLOAD MODAL -->
 <div class="modal-overlay" id="storyModal">
@@ -818,8 +839,8 @@ function loadStories() {
     const createStory = wrapper.querySelector('.create-story');
     const userStory = document.getElementById('userStory');
 
-    // Remove existing story items except create and user
-    wrapper.querySelectorAll('.story-item:not(.create-story):not(#userStory):not(#storySkeleton)').forEach(el => el.remove());
+    // Remove existing story cards except create and user
+    wrapper.querySelectorAll('.story-card:not(.create-story-card):not(#userStory)').forEach(el => el.remove());
 
     if (!snapshot.exists()) return;
 
@@ -827,25 +848,36 @@ function loadStories() {
     snapshot.forEach((userStoriesSnap) => {
       const uid = userStoriesSnap.key;
       if (uid === currentUser.uid) {
-        // User has stories
-        document.getElementById('userStory').style.display = 'flex';
+        // Populate own story card
+        let latestOwn = null;
+        userStoriesSnap.forEach(s => {
+          const d = s.val();
+          if (Date.now() - d.timestamp < 24 * 60 * 60 * 1000) {
+            if (!latestOwn || d.timestamp > latestOwn.timestamp) latestOwn = d;
+          }
+        });
+        if (latestOwn) {
+          document.getElementById('userStory').style.display = 'block';
+          if (latestOwn.mediaUrl) document.getElementById('userStoryThumb').src = latestOwn.mediaUrl;
+          const myAvatar = currentUserData?.profilePhotoUrl || currentUser.photoURL || latestOwn.avatarUrl || '';
+          document.getElementById('userStoryAvatar').src = myAvatar;
+          const myName = currentUserData?.displayName || currentUser.displayName || 'You';
+          document.getElementById('userStoryName').textContent = myName;
+        }
       }
 
       userStoriesSnap.forEach((storySnap) => {
         const story = storySnap.val();
         story.id = storySnap.key;
         story.uid = uid;
-        // Only show stories from last 24 hours
         if (Date.now() - story.timestamp < 24 * 60 * 60 * 1000) {
           stories.push(story);
         }
       });
     });
 
-    // Sort by timestamp (newest first)
     stories.sort((a, b) => b.timestamp - a.timestamp);
 
-    // Add friend stories
     stories.forEach(story => {
       if (story.uid !== currentUser.uid) {
         addStoryToUI(story);
@@ -858,53 +890,140 @@ function addStoryToUI(story) {
   const wrapper = document.getElementById('storiesWrapper');
 
   const storyEl = document.createElement('div');
-  storyEl.className = 'story-item';
+  storyEl.className = 'story-card';
   storyEl.onclick = () => viewStory(story.uid, story.id);
 
-  const isSeen = story.viewers && story.viewers[currentUser.uid];
-
-  // FIX: Use avatarUrl for the profile picture, fallback to mediaUrl
-  // Friend page uses: profilePhotoUrl || photoURL || avatar || photo || ''
-  // We need to fetch the user's profile to get their photo
   get(ref(db, `users/${story.uid}`)).then(userSnap => {
     let avatarUrl = '';
     if (userSnap.exists()) {
       const u = userSnap.val();
       avatarUrl = u.profilePhotoUrl || u.photoURL || u.avatar || u.photo || '';
     }
-    // Fallback chain: user's profile photo -> story.avatarUrl -> story.mediaUrl -> default
-    const finalAvatar = avatarUrl || story.avatarUrl || story.mediaUrl || 'https://i.pravatar.cc/150?img=11';
+    const finalAvatar = avatarUrl || story.avatarUrl || 'https://i.pravatar.cc/150?img=11';
+    const thumbUrl = story.mediaUrl || finalAvatar;
 
     storyEl.innerHTML = `
-      <div class="story-ring ${isSeen ? 'seen' : ''}">
-        <div class="story-ring-inner">
-          <img src="${escapeHtml(finalAvatar)}" alt="${escapeHtml(story.authorName || 'User')}" class="story-avatar" onerror="this.src='https://i.pravatar.cc/150?img=11'">
-        </div>
-      </div>
-      <span class="story-label">${escapeHtml(story.authorName || 'User')}</span>
+      <img src="${escapeHtml(thumbUrl)}" alt="" class="story-thumb" onerror="this.src='https://i.pravatar.cc/150?img=11'">
+      <img src="${escapeHtml(finalAvatar)}" alt="" class="story-uploader-pic" onerror="this.src='https://i.pravatar.cc/150?img=11'">
+      <span class="story-uploader-name">${escapeHtml(story.authorName || 'User')}</span>
     `;
   }).catch(() => {
-    // Fallback if user fetch fails
-    const finalAvatar = story.avatarUrl || story.mediaUrl || 'https://i.pravatar.cc/150?img=11';
+    const finalAvatar = story.avatarUrl || 'https://i.pravatar.cc/150?img=11';
+    const thumbUrl = story.mediaUrl || finalAvatar;
     storyEl.innerHTML = `
-      <div class="story-ring ${isSeen ? 'seen' : ''}">
-        <div class="story-ring-inner">
-          <img src="${escapeHtml(finalAvatar)}" alt="${escapeHtml(story.authorName || 'User')}" class="story-avatar" onerror="this.src='https://i.pravatar.cc/150?img=11'">
-        </div>
-      </div>
-      <span class="story-label">${escapeHtml(story.authorName || 'User')}</span>
+      <img src="${escapeHtml(thumbUrl)}" alt="" class="story-thumb" onerror="this.src='https://i.pravatar.cc/150?img=11'">
+      <img src="${escapeHtml(finalAvatar)}" alt="" class="story-uploader-pic" onerror="this.src='https://i.pravatar.cc/150?img=11'">
+      <span class="story-uploader-name">${escapeHtml(story.authorName || 'User')}</span>
     `;
   });
 
   wrapper.appendChild(storyEl);
 }
 
+let currentViewerStory = null;
+let storyProgressTimer = null;
+
 window.viewStory = function(uid, storyId) {
+  if (!currentUser) return;
+
   // Mark as seen
   if (uid !== currentUser.uid && storyId) {
     set(ref(db, `stories/${uid}/${storyId}/viewers/${currentUser.uid}`), true);
   }
-  showToast('Viewing story');
+
+  // Fetch story data
+  const isOwn = uid === 'user' || uid === currentUser.uid;
+  const targetUid = isOwn ? currentUser.uid : uid;
+
+  get(ref(db, `stories/${targetUid}`)).then(snap => {
+    if (!snap.exists()) return;
+
+    let story = null;
+    // Get specific story or latest
+    if (storyId && snap.child(storyId).exists()) {
+      story = snap.child(storyId).val();
+      story.id = storyId;
+      story.uid = targetUid;
+    } else {
+      // Get latest
+      snap.forEach(s => {
+        const d = s.val();
+        if (!story || d.timestamp > story.timestamp) {
+          story = d;
+          story.id = s.key;
+          story.uid = targetUid;
+        }
+      });
+    }
+
+    if (!story) return;
+    currentViewerStory = story;
+
+    // Get uploader info
+    get(ref(db, `users/${targetUid}`)).then(userSnap => {
+      let avatarUrl = '';
+      let name = story.authorName || 'User';
+      if (userSnap.exists()) {
+        const u = userSnap.val();
+        avatarUrl = u.profilePhotoUrl || u.photoURL || u.avatar || u.photo || '';
+        name = u.displayName || u.name || name;
+      }
+
+      document.getElementById('storyViewerImg').src = story.mediaUrl || '';
+      document.getElementById('storyViewerAvatar').src = avatarUrl || 'https://i.pravatar.cc/150?img=11';
+      document.getElementById('storyViewerName').textContent = name;
+
+      // Time ago
+      const mins = Math.floor((Date.now() - story.timestamp) / 60000);
+      document.getElementById('storyViewerTime').textContent =
+        mins < 60 ? `${mins}m ago` : `${Math.floor(mins/60)}h ago`;
+
+      // Show delete button only for own stories
+      const delBtn = document.getElementById('storyViewerDelete');
+      if (isOwn || targetUid === currentUser.uid) {
+        delBtn.classList.add('visible');
+      } else {
+        delBtn.classList.remove('visible');
+      }
+
+      // Show viewer
+      document.getElementById('storyViewer').classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      // Progress bar — 5 seconds
+      const fill = document.getElementById('storyProgressFill');
+      fill.style.transition = 'none';
+      fill.style.width = '0%';
+      setTimeout(() => {
+        fill.style.transition = 'width 5s linear';
+        fill.style.width = '100%';
+      }, 50);
+      clearTimeout(storyProgressTimer);
+      storyProgressTimer = setTimeout(() => closeStoryViewer(), 5100);
+    });
+  });
+};
+
+window.closeStoryViewer = function() {
+  document.getElementById('storyViewer').classList.remove('active');
+  document.body.style.overflow = '';
+  clearTimeout(storyProgressTimer);
+  document.getElementById('storyProgressFill').style.width = '0%';
+  currentViewerStory = null;
+};
+
+window.deleteCurrentStory = async function() {
+  if (!currentViewerStory || !currentUser) return;
+  if (currentViewerStory.uid !== currentUser.uid) return;
+
+  try {
+    await remove(ref(db, `stories/${currentUser.uid}/${currentViewerStory.id}`));
+    document.getElementById('userStory').style.display = 'none';
+    closeStoryViewer();
+    showToast('Story deleted!');
+  } catch(e) {
+    showToast('Delete failed');
+  }
 };
 
 window.openStoryUpload = function() {
@@ -939,20 +1058,48 @@ window.handleStoryFile = function(e) {
 window.uploadStory = async function() {
   if (!selectedStoryFile || !currentUser) return;
   showToast('Uploading...');
+
+  // Show local preview immediately as thumbnail
+  const localPreview = document.getElementById('previewImg').src;
+  const myAvatar = currentUserData?.profilePhotoUrl || currentUser.photoURL || '';
+  const myName = currentUserData?.displayName || currentUser.displayName || 'You';
+
+  document.getElementById('userStoryThumb').src = localPreview;
+  document.getElementById('userStoryAvatar').src = myAvatar;
+  document.getElementById('userStoryName').textContent = myName;
+  document.getElementById('userStory').style.display = 'block';
+
   try {
     const result = await uploadMediaAndSave(selectedStoryFile, `stories/${currentUser.uid}/${Date.now()}`, {
       contentType: 'story',
-      authorName: currentUserData?.displayName || currentUser.displayName || 'User',
+      authorName: myName,
       authorUid: currentUser.uid,
-      avatarUrl: currentUserData?.profilePhotoUrl || currentUser.photoURL || '',
+      avatarUrl: myAvatar,
       timestamp: Date.now()
     });
 
-    document.getElementById('userStory').style.display = 'flex';
+    // Update with real URL from Firebase if available
+    const realUrl = result?.mediaUrl || result?.url || result?.secure_url || localPreview;
+    document.getElementById('userStoryThumb').src = realUrl;
+
+    // Also fetch from Firebase to get actual saved mediaUrl
+    get(ref(db, `stories/${currentUser.uid}`)).then(snap => {
+      if (!snap.exists()) return;
+      let latest = null;
+      snap.forEach(s => {
+        const d = s.val();
+        if (!latest || d.timestamp > latest.timestamp) latest = d;
+      });
+      if (latest?.mediaUrl) {
+        document.getElementById('userStoryThumb').src = latest.mediaUrl;
+      }
+    });
+
     closeStoryUpload();
     showToast('Story uploaded!');
   } catch (err) {
     console.error(err);
+    document.getElementById('userStory').style.display = 'none';
     showToast('Upload failed!');
   }
 };
@@ -2039,11 +2186,29 @@ window.addEventListener('popstate', function(e) {
   </div>
 </div>
 
+<!-- STORY VIEWER FULLSCREEN -->
+<div class="story-viewer" id="storyViewer">
+  <div class="story-viewer-bg">
+    <div class="story-progress"><div class="story-progress-fill" id="storyProgressFill"></div></div>
+    <img src="" alt="" class="story-viewer-img" id="storyViewerImg">
+    <!-- top bar -->
+    <div class="story-viewer-top">
+      <img src="" alt="" class="story-viewer-avatar" id="storyViewerAvatar">
+      <span class="story-viewer-name" id="storyViewerName"></span>
+      <span class="story-viewer-time" id="storyViewerTime"></span>
+      <div class="story-viewer-close" onclick="closeStoryViewer()"><i class="fas fa-times"></i></div>
+    </div>
+    <!-- delete button (own stories only) -->
+    <button class="story-viewer-delete" id="storyViewerDelete" onclick="deleteCurrentStory()"><i class="fas fa-trash-alt" style="margin-right:6px"></i>Delete Story</button>
+  </div>
+</div>
+
 <script>
 (function(){
   function fixHeaderOffset(){
     var h = document.getElementById('mainHeader').offsetHeight;
-    document.getElementById('scrollHideZone').style.marginTop = h + 'px';
+    var t = document.getElementById('tabsContainer').offsetHeight;
+    document.getElementById('scrollHideZone').style.marginTop = (h + t) + 'px';
     document.getElementById('tabsContainer').style.top = h + 'px';
   }
   fixHeaderOffset();

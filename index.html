@@ -27,7 +27,7 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 
 
 /* STORIES - CARD STYLE */
-.stories-container{background:#fff;padding:8px 0 10px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.stories-container{background:#fff;padding:8px 0 4px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
 .stories-container::-webkit-scrollbar{display:none}
 .stories-wrapper{display:flex;gap:8px;padding:0 10px;min-width:max-content}
 
@@ -53,8 +53,8 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 
 
 /* TABS - Black text and underline */
-.tabs-container{display:flex;align-items:center;justify-content:center;gap:28px;padding:0 12px;background:#fff}
-.tab-item{position:relative;padding:4px 0;font-size:14px;font-weight:600;color:#888;cursor:pointer;transition:color .2s;white-space:nowrap}
+.tabs-container{display:flex;align-items:center;justify-content:center;gap:28px;padding:5px 12px 7px;background:#fff}
+.tab-item{position:relative;padding:3px 0 4px;font-size:16px;font-weight:600;color:#888;cursor:pointer;transition:color .2s;white-space:nowrap}
 .tab-item.active{color:#1a1a1a}
 .tab-item::after{content:'';position:absolute;bottom:0;left:-4px;right:-4px;height:2px;background:#1a1a1a;border-radius:1px;transform:scaleX(0);transition:transform .25s ease}
 .tab-item.active::after{transform:scaleX(1)}
@@ -82,26 +82,28 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 
 /* POSTS - FULL WIDTH, LEFT ALIGNED */
 .posts-container{padding:0;max-width:100%;margin:0}
-.post-card{background:#fff;margin-bottom:0;border-bottom:1px solid rgba(224,224,224,0.4)}
+.post-card{background:#fff;margin-bottom:0;border-bottom:1px solid rgba(224,224,224,0.9)}
 .post-header{display:flex;align-items:center;padding:10px 12px 6px;gap:10px}
 .post-avatar{width:44px;height:44px;border-radius:50%;object-fit:cover}
 .post-info{flex:1}
-.post-author{font-weight:600;font-size:14px;color:#1a1a1a}
-.post-meta{display:flex;align-items:center;gap:4px;font-size:12px;color:#888;margin-top:1px}
-.post-username{color:#888}
-.post-dot{width:3px;height:3px;background:#bbb;border-radius:50%}
-.post-time{color:#888}
+.post-author{font-weight:600;font-size:15px;color:#1a1a1a}
+.post-meta{display:flex;align-items:center;gap:4px;font-size:13px;color:#777;margin-top:1px}
+.post-username{color:#777}
+.post-dot{width:3px;height:3px;background:#999;border-radius:50%;flex-shrink:0}
+.post-time{color:#777}
+.post-privacy{display:flex;align-items:center;color:#777}
+.post-privacy svg{width:13px;height:13px}
 .post-more{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#666}
 .post-more:hover{background:#f0f0f0}
 .post-more i{font-size:16px}
 .post-image{width:calc(100% - 24px);margin:0 12px;border-radius:10px;max-height:500px;height:auto;object-fit:contain}
 .post-content{padding:6px 12px 8px;font-size:14px;line-height:1.5;color:#333}
 .post-actions{display:flex;align-items:center;padding:8px 12px;gap:20px;border-top:none}
-.action-btn{display:flex;align-items:center;gap:6px;cursor:pointer;color:#666;font-size:14px;font-weight:500;padding:6px 0;transition:color .2s}
+.action-btn{display:flex;align-items:center;gap:6px;cursor:pointer;color:#111;font-size:14px;font-weight:500;padding:6px 0;transition:color .2s}
 .action-btn:hover{color:#1877f2}
-.action-btn i{font-size:22px}
-.action-btn svg{width:22px;height:22px}
-.action-btn.share-btn svg{width:30px;height:30px;stroke-width:1.3}
+.action-btn i{font-size:27px}
+.action-btn svg{width:27px;height:27px}
+.action-btn.share-btn svg{width:33px;height:33px;stroke-width:1.5}
 .action-btn.liked{color:#ff3b30}
 .action-btn.liked i{font-weight:900}
 .action-btn.saved{color:#1877f2}
@@ -123,9 +125,28 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 .sheet-item-title{font-size:14px;font-weight:600;color:#1a1a1a}
 .sheet-item-desc{font-size:11px;color:#888;margin-top:1px}
 
+/* SHARE BOTTOM SHEET */
+.share-sheet-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:4000;display:none;align-items:flex-end;justify-content:center}
+.share-sheet-overlay.active{display:flex}
+.share-sheet-modal{background:#fff;border-radius:20px 20px 0 0;width:100%;max-width:500px;overflow:hidden;animation:slideUpSheet .3s ease;padding-bottom:env(safe-area-inset-bottom)}
+.share-sheet-title{font-size:15px;font-weight:700;color:#1a1a1a;text-align:center;padding:16px 20px 10px}
+.share-platforms{display:flex;justify-content:space-around;padding:10px 16px 16px;gap:8px}
+.share-platform-btn{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;flex:1;min-width:60px}
+.share-platform-icon{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.share-platform-icon i{font-size:22px;color:#fff}
+.share-platform-icon svg{width:22px;height:22px}
+.share-platform-label{font-size:11px;font-weight:500;color:#555;text-align:center}
+.share-divider{height:1px;background:#f0f0f0;margin:0 16px}
+.share-copy-row{display:flex;align-items:center;gap:10px;padding:12px 16px 20px;cursor:pointer;transition:background .15s}
+.share-copy-row:hover{background:#f8f8f8}
+.share-copy-icon{width:40px;height:40px;border-radius:50%;background:#f0f0f0;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.share-copy-icon i{font-size:17px;color:#444}
+.share-copy-text{font-size:14px;font-weight:600;color:#1a1a1a}
+.share-cancel-btn{width:100%;padding:14px;border:none;background:#f5f5f5;font-size:15px;font-weight:600;color:#333;cursor:pointer;margin:0}
+
 /* BOTTOM NAVBAR */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;height:56px;background:#fff;display:flex;align-items:center;justify-content:space-around;z-index:2000;box-shadow:0 -2px 10px rgba(0,0,0,.06);padding-bottom:env(safe-area-inset-bottom)}
-.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:100%;cursor:pointer;transition:color .2s;color:#333}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:100%;cursor:pointer;transition:color .2s;color:#0a0a0a}
 .nav-item.active{color:#1877f2}
 .nav-item svg{width:25px;height:25px;stroke-width:1.5}
 .nav-label{font-size:9px;font-weight:500;letter-spacing:0.1px;line-height:1}
@@ -755,6 +776,37 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 </div>
 </div>
 
+<!-- SHARE BOTTOM SHEET -->
+<div class="share-sheet-overlay" id="shareSheetOverlay" onclick="if(event.target===this)closeShareSheet()">
+  <div class="share-sheet-modal">
+    <div class="share-sheet-title">পোস্ট শেয়ার করুন</div>
+    <div class="share-platforms">
+      <div class="share-platform-btn" onclick="shareTo('facebook')">
+        <div class="share-platform-icon" style="background:#1877f2"><i class="fab fa-facebook-f"></i></div>
+        <span class="share-platform-label">Facebook</span>
+      </div>
+      <div class="share-platform-btn" onclick="shareTo('whatsapp')">
+        <div class="share-platform-icon" style="background:#25d366"><i class="fab fa-whatsapp"></i></div>
+        <span class="share-platform-label">WhatsApp</span>
+      </div>
+      <div class="share-platform-btn" onclick="shareTo('twitter')">
+        <div class="share-platform-icon" style="background:#000"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.629 5.905-5.629Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
+        <span class="share-platform-label">X (Twitter)</span>
+      </div>
+      <div class="share-platform-btn" onclick="shareTo('telegram')">
+        <div class="share-platform-icon" style="background:#2ca5e0"><i class="fab fa-telegram-plane"></i></div>
+        <span class="share-platform-label">Telegram</span>
+      </div>
+    </div>
+    <div class="share-divider"></div>
+    <div class="share-copy-row" onclick="copyShareLink()">
+      <div class="share-copy-icon"><i class="fas fa-link"></i></div>
+      <span class="share-copy-text">লিংক কপি করুন</span>
+    </div>
+    <button class="share-cancel-btn" onclick="closeShareSheet()">বাতিল</button>
+  </div>
+</div>
+
 <!-- POSTS CONTAINER -->
 <div class="posts-container" id="postsContainer">
 <!-- Loading skeleton -->
@@ -804,21 +856,15 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
 <div class="bottom-nav">
 <div class="nav-item active" onclick="window.location.href='/'">
 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.2L2.8 10.6a1 1 0 0 0 .6 1.8H5V20a1 1 0 0 0 1 1h4v-5h4v5h4a1 1 0 0 0 1-1v-7.6h1.6a1 1 0 0 0 .6-1.8L12 3.2z"/></svg>
-<span class="nav-label">Home</span>
 </div>
 <div class="nav-item" onclick="window.location.href='/friend'">
 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 19h4a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-2m-2.236-4a3 3 0 1 0 0-4M3 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
-<span class="nav-label">Friend</span>
 </div>
 <div class="nav-item" onclick="window.location.href='/reels'">
-<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-  <rect x="3" y="4" width="18" height="13" rx="2"/>
-  <path d="M10 8.5L15 11L10 13.5Z"/>
-  <path d="M7.5 21H16.5"/>
-  <path d="M10.5 17V21"/>
-  <path d="M13.5 17V21"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="3" y="3" width="18" height="18" rx="5"/>
+  <path d="M9.5 9 C9.5 8.35 10.2 7.95 10.75 8.3 L16 11.55 C16.55 11.9 16.55 12.65 16 13 L10.75 16.25 C10.2 16.6 9.5 16.2 9.5 15.55 Z"/>
 </svg>
-<span class="nav-label">Video</span>
 </div>
 <div class="nav-item" onclick="window.location.href='/inbox'">
 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -827,7 +873,11 @@ body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a}
   <circle cx="12" cy="11.5" r="1.15" fill="currentColor" stroke="none"/>
   <circle cx="16" cy="11.5" r="1.15" fill="currentColor" stroke="none"/>
 </svg>
-<span class="nav-label">Message</span>
+</div>
+<div class="nav-item" onclick="window.location.href='/menu'">
+<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M9.143 4H4.857A.857.857 0 0 0 4 4.857v4.286c0 .473.384.857.857.857h4.286A.857.857 0 0 0 10 9.143V4.857A.857.857 0 0 0 9.143 4Zm10 0h-4.286a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286A.857.857 0 0 0 20 9.143V4.857A.857.857 0 0 0 19.143 4Zm-10 10H4.857a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286a.857.857 0 0 0 .857-.857v-4.286A.857.857 0 0 0 9.143 14Zm10 0h-4.286a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286a.857.857 0 0 0 .857-.857v-4.286a.857.857 0 0 0-.857-.857Z"/>
+</svg>
 </div>
 </div>
 
@@ -1276,27 +1326,6 @@ function renderPosts(posts) {
   // Feed video autoplay observer
   observeFeedVideos();
 
-  // View tracking observer
-  observePostViews();
-}
-
-let postViewObserver = null;
-const viewedPosts = new Set();
-
-function observePostViews() {
-  if (postViewObserver) postViewObserver.disconnect();
-  postViewObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const card = entry.target;
-      const postId = card.dataset.postId;
-      const ownerUid = card.dataset.ownerUid;
-      if (!postId || !ownerUid || viewedPosts.has(postId)) return;
-      viewedPosts.add(postId);
-      set(ref(db, `posts/${ownerUid}/${postId}/views/${currentUser.uid}`), true);
-    });
-  }, { threshold: 0.6 });
-  document.querySelectorAll('.post-card[data-post-id]').forEach(el => postViewObserver.observe(el));
 }
 
 function createPostElement(post) {
@@ -1310,7 +1339,8 @@ function createPostElement(post) {
   const isSaved = post.saves && post.saves[currentUser?.uid];
   const likeCount = post.likes ? Object.keys(post.likes).length : 0;
   const commentCount = post.comments ? Object.keys(post.comments).length : 0;
-  const shareCount = post.shares || 0;
+  const repostCount = post.reposts ? Object.keys(post.reposts).length : 0;
+  const isReposted = post.reposts && post.reposts[currentUser?.uid];
 
   // Video: show thumbnail with play button, click opens full-screen player
   // Image: show as before
@@ -1360,6 +1390,14 @@ function createPostElement(post) {
           <span class="post-username">@${escapeHtml(post.authorUsername || 'user')}</span>
           <span class="post-dot"></span>
           <span class="post-time">${timeAgo}</span>
+          <span class="post-dot"></span>
+          <span class="post-privacy">${
+            (post.privacy === 'friends')
+              ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`
+              : (post.privacy === 'only_me')
+              ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`
+              : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`
+          }</span>
         </div>
       </div>
       <div class="post-more" onclick="openPostOptions('${post.id}', '${post.ownerUid}')"><i class="fas fa-ellipsis-v"></i></div>
@@ -1368,26 +1406,22 @@ function createPostElement(post) {
     ${mediaHtml}
     <div class="post-actions">
       <div class="action-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike('${post.id}', '${post.ownerUid}', this)">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="${isLiked ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <svg width="27" height="27" viewBox="0 0 24 24" fill="${isLiked ? 'currentColor' : 'none'}" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.9932 5.13581C9.9938 2.7984 6.65975 2.16964 4.15469 4.31001C1.64964 6.45038 1.29697 10.029 3.2642 12.5604C4.89982 14.6651 9.84977 19.1041 11.4721 20.5408C11.6536 20.7016 11.7444 20.7819 11.8502 20.8135C11.9426 20.8411 12.0437 20.8411 12.1361 20.8135C12.2419 20.7819 12.3327 20.7016 12.5142 20.5408C14.1365 19.1041 19.0865 14.6651 20.7221 12.5604C22.6893 10.029 22.3797 6.42787 19.8316 4.31001C17.2835 2.19216 13.9925 2.7984 11.9932 5.13581Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span>${likeCount}</span>
       </div>
       <div class="action-btn" onclick="openComments('${post.id}', '${post.ownerUid}')">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
         <span>${commentCount}</span>
       </div>
-      <div class="action-btn" onclick="repostPost('${post.id}', '${post.ownerUid}')">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5v10"/><path d="M5 5l-3 3"/><path d="M5 5l3 3"/><path d="M19 19V9"/><path d="M19 19l-3-3"/><path d="M19 19l3-3"/><path d="M5 15c0 2.4 1.8 4 4.5 4H11"/><path d="M19 9c0-2.4-1.8-4-4.5-4H13"/></svg>
-      </div>
-      <div class="action-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M4 4.5V19a1 1 0 0 0 1 1h15M7 14l4-4 4 4 5-5m0 0h-3.207M20 9v3.207"/></svg>
-        <span>${post.views ? Object.keys(post.views).length : 0}</span>
+      <div class="action-btn ${isReposted ? 'reposted' : ''}" onclick="repostPost('${post.id}', '${post.ownerUid}', this)" style="${isReposted ? 'color:#1565c0' : ''}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5v10"/><path d="M5 5l-3 3"/><path d="M5 5l3 3"/><path d="M19 19V9"/><path d="M19 19l-3-3"/><path d="M19 19l3-3"/><path d="M5 15c0 2.4 1.8 4 4.5 4H11"/><path d="M19 9c0-2.4-1.8-4-4.5-4H13"/></svg>
+        <span>${repostCount}</span>
       </div>
       <div class="action-btn share-btn" onclick="sharePost('${post.id}', '${post.ownerUid}')">
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" d="m15.141 6 5.518 4.95a1.05 1.05 0 0 1 0 1.549l-5.612 5.088m-6.154-3.214v1.615a.95.95 0 0 0 1.525.845l5.108-4.251a1.1 1.1 0 0 0 0-1.646l-5.108-4.251a.95.95 0 0 0-1.525.846v1.7c-3.312 0-6 2.979-6 6.654v1.329a.7.7 0 0 0 1.344.353 5.174 5.174 0 0 1 4.652-3.191l.004-.003Z"/></svg>
-        <span>${shareCount}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.248 19C3.22 15.77 5.275 8.232 12.466 8.232V6.079a1.025 1.025 0 0 1 1.644-.862l5.479 4.307a1.108 1.108 0 0 1 0 1.723l-5.48 4.307a1.026 1.026 0 0 1-1.643-.861v-2.154C5.275 13.616 4.248 19 4.248 19Z"/></svg>
       </div>
       <div class="action-btn save-btn ${isSaved ? 'saved' : ''}" onclick="toggleSave('${post.id}', '${post.ownerUid}', this)">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="${isSaved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="${isSaved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
       </div>
     </div>
   `;
@@ -1617,43 +1651,94 @@ window.toggleSave = async function(postId, ownerUid, btn) {
   }
 };
 
-window.sharePost = async function(postId, ownerUid) {
-  if (!currentUser) return;
-  const postUrl = `${window.location.origin}/post?uid=${ownerUid}&id=${postId}`;
-  try {
-    if (navigator.share) {
-      await navigator.share({ url: postUrl });
-    } else {
-      await navigator.clipboard.writeText(postUrl);
-      showToast('Link copied!');
-    }
-    const shareRef = ref(db, `posts/${ownerUid}/${postId}/shares`);
-    const snap = await get(shareRef);
-    const currentShares = snap.exists() ? (snap.val() || 0) : 0;
-    await set(shareRef, currentShares + 1);
-  } catch (err) {
-    if (err.name !== 'AbortError') {
-      console.error(err);
-      showToast('Share failed');
-    }
-  }
+// ═══════════════════════════════════════════════════════════
+// SHARE SHEET
+// ═══════════════════════════════════════════════════════════
+let _sharePostId = null;
+let _shareOwnerUid = null;
+
+window.sharePost = function(postId, ownerUid) {
+  _sharePostId = postId;
+  _shareOwnerUid = ownerUid;
+  document.getElementById('shareSheetOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
 };
 
-window.repostPost = async function(postId, ownerUid) {
+window.closeShareSheet = function() {
+  document.getElementById('shareSheetOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+  _sharePostId = null;
+  _shareOwnerUid = null;
+};
+
+window.shareTo = function(platform) {
+  if (!_sharePostId || !_shareOwnerUid) return;
+  const postUrl = encodeURIComponent(`${window.location.origin}/post?uid=${_shareOwnerUid}&id=${_sharePostId}`);
+  const text = encodeURIComponent('এই পোস্টটি দেখুন!');
+  let url = '';
+  switch(platform) {
+    case 'facebook':
+      url = `https://www.facebook.com/sharer/sharer.php?u=${postUrl}`;
+      break;
+    case 'whatsapp':
+      url = `https://wa.me/?text=${text}%20${postUrl}`;
+      break;
+    case 'twitter':
+      url = `https://twitter.com/intent/tweet?text=${text}&url=${postUrl}`;
+      break;
+    case 'telegram':
+      url = `https://t.me/share/url?url=${postUrl}&text=${text}`;
+      break;
+  }
+  if (url) window.open(url, '_blank', 'noopener,noreferrer');
+  closeShareSheet();
+};
+
+window.copyShareLink = function() {
+  if (!_sharePostId || !_shareOwnerUid) return;
+  const postUrl = `${window.location.origin}/post?uid=${_shareOwnerUid}&id=${_sharePostId}`;
+  navigator.clipboard.writeText(postUrl).then(() => {
+    showToast('লিংক কপি হয়েছে!');
+  }).catch(() => {
+    showToast('কপি ব্যর্থ হয়েছে');
+  });
+  closeShareSheet()
+};
+
+window.repostPost = async function(postId, ownerUid, btn) {
   if (!currentUser) return;
   try {
     const repostRef = ref(db, `posts/${ownerUid}/${postId}/reposts/${currentUser.uid}`);
     const snap = await get(repostRef);
+    const countEl = btn ? btn.querySelector('span') : null;
+    const currentCount = countEl ? parseInt(countEl.textContent) || 0 : 0;
+
     if (snap.exists()) {
+      // Remove repost
+      _skipRenderCount++;
       await remove(repostRef);
-      showToast('Repost removed');
+      setTimeout(() => { _skipRenderCount = Math.max(0, _skipRenderCount - 1); }, 600);
+      if (btn) {
+        btn.classList.remove('reposted');
+        btn.style.color = '';
+      }
+      if (countEl) countEl.textContent = Math.max(0, currentCount - 1);
+      showToast('রিপোস্ট সরানো হয়েছে');
     } else {
+      // Add repost
+      _skipRenderCount++;
       await set(repostRef, true);
-      showToast('Reposted!');
+      setTimeout(() => { _skipRenderCount = Math.max(0, _skipRenderCount - 1); }, 600);
+      if (btn) {
+        btn.classList.add('reposted');
+        btn.style.color = '#1565c0';
+      }
+      if (countEl) countEl.textContent = currentCount + 1;
+      showToast('রিপোস্ট করা হয়েছে!');
     }
   } catch (err) {
     console.error(err);
-    showToast('Repost failed');
+    showToast('রিপোস্ট ব্যর্থ হয়েছে');
   }
 };
 
@@ -2044,10 +2129,10 @@ function loadPlayerPost(index) {
   // Update counts
   const likes = post.likes ? Object.keys(post.likes).length : 0;
   const comments = post.comments ? Object.keys(post.comments).length : 0;
-  const shares = post.shares || 0;
+  const reposts = post.reposts ? Object.keys(post.reposts).length : 0;
   likeCount.textContent = likes;
   commentCount.textContent = comments;
-  repostCount.textContent = shares;
+  repostCount.textContent = reposts;
 
   // Update like button state
   const isLiked = post.likes && post.likes[currentUser?.uid];
@@ -2198,14 +2283,15 @@ window.playerOpenComments = function() {
 
 window.playerRepost = function() {
   if (playerCurrentPost) {
-    sharePost(playerCurrentPost.id, playerCurrentPost.ownerUid);
+    const repostBtn = document.querySelector(`[data-post-id="${playerCurrentPost.id}"] .action-btn.reposted`) ||
+                      document.querySelector(`[data-post-id="${playerCurrentPost.id}"] .action-btn:nth-child(3)`);
+    repostPost(playerCurrentPost.id, playerCurrentPost.ownerUid, repostBtn);
   }
 };
 
 window.playerShare = function() {
   if (playerCurrentPost) {
-    const url = `${window.location.origin}/post?uid=${playerCurrentPost.ownerUid}&id=${playerCurrentPost.id}`;
-    navigator.clipboard.writeText(url).then(() => showToast('Link copied!'));
+    sharePost(playerCurrentPost.id, playerCurrentPost.ownerUid);
   }
 };
 
@@ -2399,7 +2485,7 @@ window.addEventListener('popstate', function(e) {
   function fixHeaderOffset(){
     var h = document.getElementById('mainHeader').offsetHeight;
     var t = document.getElementById('tabsContainer').offsetHeight;
-    document.getElementById('scrollHideZone').style.marginTop = (h + t) + 'px';
+    document.getElementById('scrollHideZone').style.marginTop = h + 'px';
     document.getElementById('tabsContainer').style.top = h + 'px';
   }
   fixHeaderOffset();
